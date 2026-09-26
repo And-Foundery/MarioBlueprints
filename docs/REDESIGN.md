@@ -182,7 +182,7 @@ Other confirmed night effects we can use in ideas:
 
 ---
 
-## Round 4 updates (sections A and B are now replaced by Round 5)
+## Round 4 (old, replaced by Round 5. Only the "Name it!" typing box carries over)
 
 ### A. Six bigger wedges
 Music leaves the wheel because it has its own tab. Race joins Ride. There's a new **Famous Places** wedge.
