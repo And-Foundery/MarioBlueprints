@@ -11,8 +11,8 @@
 | Language | English |
 | Who can use it | Our family only. Private, no public sign-ups |
 | Icons | No emojis. We draw our own SVG icons (no Nintendo sprites) |
-| Creativity | The site gives **sparks, not plans**. Kids pick how much help they want (Tiny spark, Spark, Big spark). Everything else is labeled "You choose!", and instead of steps they get open questions like "Where does the big surprise go?" |
-| Music | A whole section on Music Blocks: how they work, a song helper with a block-by-block map, and a tune maker kids can play and hear |
+| Creativity | **Updated in round 3:** an **Idea Wheel** gives one whole level idea per spin (a name, 1–2 sentences, 3–4 parts) and no steps. See `docs/REDESIGN.md` |
+| Music | A Music Blocks section. **Updated in round 3:** a Build-Along that shows one block at a time with 'right X, up Y' steps. See `docs/REDESIGN.md` |
 | Accounts / database | Not needed. Saved ideas stay on the device. **No Supabase** for now |
 | Hosting | **Vercel** (free Hobby plan), protected with a family password. GitHub Pages would need a public repo on the free plan, so the site would be public |
 
