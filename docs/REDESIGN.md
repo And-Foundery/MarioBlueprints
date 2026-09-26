@@ -449,3 +449,26 @@ checked: yes / not yet
 1. Are 8 wedges right, or do you want fewer and bigger ones (6)?
 2. Should **Mix it up** stay, or is **Spin again** enough?
 3. Music: which songs do the kids actually want? Send me a list.
+
+---
+
+## Round 6: fact check log (web sources, September 2026)
+
+| Fact used on the site | Result |
+|---|---|
+| Boom Boom is in all 5 game styles | Confirmed (Pom Pom is only in 3D World) |
+| Bowser Jr. is in every style **except** 3D World | Confirmed |
+| Burner: a 1×1 block that shoots a 3-block flame on and off | Confirmed |
+| A Lift on a Track follows the track | Confirmed |
+| Castle lava level can be raised or made to change | Confirmed |
+| Timer can be set from 10 to 500 seconds, in steps of 10 (default 300) | Confirmed |
+| Master Sword: SMB style only, made by shaking a Super Mushroom, can come out of a ? Block | Confirmed |
+| Yoshi's Egg can go in a ? Block, and only in SMW and NSMBU | Confirmed |
+| P Warp Door only appears while a P Switch is active | Confirmed |
+| Key Door needs a Key. Collecting all Pink Coins gives a Key | Confirmed |
+| Koopa Troopa Car and Clear Pipe are 3D World only | Confirmed |
+| Night Sky has low gravity. Night isn't in 3D World | Confirmed |
+| Music Blocks: height sets the note, and the sound depends on the object. Songs play with steady scrolling (auto-scroll). A Cloud Block right above a Music Block makes the note play only once | Confirmed (community guides) |
+| A "reach the goal riding Yoshi" clear condition | **Not found**, so the card now says "Bonus challenge: keep Yoshi the whole way!" (the kids' own challenge, not a game setting) |
+
+Removed: The Office theme idea.

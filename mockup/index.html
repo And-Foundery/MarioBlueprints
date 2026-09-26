@@ -325,6 +325,56 @@
   .part .dotck.todo { background: var(--sun); }
 
   .hubbtn { position: absolute; left: 50%; top: 50%; width: 22%; height: 22%; transform: translate(-50%,-50%); border-radius: 50%; border: 4px solid var(--ink); background: var(--red); color: #fff; font-family: "Lilita One", sans-serif; font-size: clamp(16px, 4vw, 22px); z-index: 2; padding: 0; }
+
+  /* ---- Brand ---- */
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brandmark { width: clamp(64px, 12vw, 88px); height: auto; flex: none; filter: drop-shadow(0 4px 0 rgba(19,32,63,.55)); }
+  .wordmark h1 { font-size: clamp(32px, 7vw, 52px); line-height: .95; display: flex; flex-wrap: wrap; gap: 0 .18em; }
+  .wm-a span, .wm-b { -webkit-text-stroke: 0; paint-order: stroke fill; text-shadow: 0 4px 0 var(--ink), 3px 0 0 var(--ink), -3px 0 0 var(--ink), 0 -3px 0 var(--ink), 3px 4px 0 var(--ink), -3px 4px 0 var(--ink); }
+  .wm-a span { display: inline-block; color: var(--red); }
+  .wm-a span:nth-child(2) { color: var(--sun); transform: translateY(-3px) rotate(-4deg); }
+  .wm-a span:nth-child(3) { color: #4CCB7A; transform: rotate(3deg); }
+  .wm-a span:nth-child(4) { color: #7FB2FF; transform: translateY(-2px); }
+  .wm-a span:nth-child(5) { color: var(--sun); transform: rotate(-3deg); }
+  .wm-b { color: #fff; }
+  .wordmark p { margin: 6px 0 0; font-weight: 900; color: #CFE0FF; letter-spacing: .02em; }
+
+  /* ---- Idea scene + stickers ---- */
+  .scenebox { border-bottom: 3px solid var(--ink); line-height: 0; }
+  .scenebox svg { width: 100%; height: auto; display: block; }
+  .stickers { width: 100%; max-width: 380px; border: 3px dashed var(--line); border-radius: 16px; padding: 10px; }
+  .stickers h4 { margin: 0 0 8px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); font-weight: 900; text-align: center; }
+  .stickrow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+  .sticker { position: relative; aspect-ratio: 1; border-radius: 50%; border: 3px solid var(--ink); display: grid; place-items: center; background: #fff; }
+  .sticker svg.ic { width: 60%; height: 60%; }
+  .sticker.off { opacity: .28; filter: grayscale(1); border-style: dashed; }
+  .sticker b { position: absolute; right: -6px; bottom: -6px; background: var(--ink); color: #fff; border-radius: 999px; font-size: 12px; min-width: 22px; height: 22px; display: grid; place-items: center; border: 2px solid #fff; }
+  .btn.built { background: var(--sun); }
+
+  /* ---- Music copy-the-picture ---- */
+  .recipe { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .recipe .rbox { display: flex; flex-direction: column; align-items: center; gap: 6px; font-weight: 900; text-align: center; }
+  .recipe svg.ic { width: 64px; height: 64px; }
+  .recipe .plus { font-family: "Lilita One", sans-serif; font-size: 36px; }
+  .musicblk { position: relative; width: 64px; height: 64px; }
+  .musicblk svg.ic { position: absolute; }
+  .musicblk .tiny { width: 32px; height: 32px; right: -8px; top: -12px; }
+  .parttabs { display: flex; gap: 8px; flex-wrap: wrap; }
+  .parttab { border: 3px solid var(--ink); border-radius: 12px; background: #fff; font-weight: 900; padding: 6px 14px; min-height: 48px; }
+  .parttab[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .parttab.done { background: #E3F6EA; }
+  .copyhint { font-weight: 800; margin: 0; }
+  .copygrid { border: 3px solid var(--ink); border-radius: 16px; background: #fff; overflow-x: auto; }
+  .copygrid svg { display: block; }
+  .copygrid .blk { cursor: pointer; }
+  .copygrid .blk.now rect { stroke-width: 5; }
+  .checks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .checks label { display: flex; align-items: center; gap: 12px; border: 3px solid var(--ink); border-radius: 14px; padding: 10px 12px; font-weight: 800; background: #fff; cursor: pointer; }
+  .checks input { width: 28px; height: 28px; accent-color: var(--green); flex: none; }
+  .checks svg.ic { width: 34px; height: 34px; }
+  .checks label:has(input:checked) { background: #E3F6EA; }
+  .tipline { display: flex; gap: 10px; align-items: center; background: var(--sun-soft); border: 2px solid var(--ink); border-radius: 14px; padding: 10px 12px; font-weight: 800; }
+  .tipline svg.ic { width: 34px; height: 34px; }
 </style>
 
 <!-- Icon set: drawn for this project, no game sprites -->
@@ -406,15 +456,31 @@
     <symbol id="i-same" viewBox="0 0 48 48"><rect x="8" y="14" width="32" height="7" rx="3" fill="#8E97AB"/><rect x="8" y="27" width="32" height="7" rx="3" fill="#8E97AB"/></symbol>
     <symbol id="i-flagpole" viewBox="0 0 48 48"><path d="M16 42V6" fill="none" stroke-width="3"/><path d="M17 8l20 8-20 8z" fill="#22A45D"/><rect x="10" y="40" width="12" height="4" rx="1.5" fill="#8E97AB"/></symbol>
     <symbol id="i-gift" viewBox="0 0 48 48"><rect x="7" y="18" width="34" height="24" rx="3" fill="#B98CF5"/><rect x="5" y="12" width="38" height="8" rx="2" fill="#D6BCFF"/><path d="M24 12v30" fill="none" stroke-width="3"/><path d="M24 12c-4-8-12-6-9-1 1 1 5 1 9 1zM24 12c4-8 12-6 9-1-1 1-5 1-9 1z" fill="#FFC93C"/></symbol>
+    <symbol id="i-koopacar" viewBox="0 0 48 48"><path d="M6 32c0-8 6-14 16-14h6c8 0 14 6 14 14z" fill="#22A45D"/><path d="M14 18c2-6 8-9 14-7" fill="none" stroke-width="2.6"/><rect x="4" y="30" width="40" height="7" rx="3" fill="#FFF3D6"/><circle cx="14" cy="38" r="5" fill="#2E3446"/><circle cx="34" cy="38" r="5" fill="#2E3446"/><circle cx="14" cy="38" r="1.8" fill="#fff" stroke="none"/><circle cx="34" cy="38" r="1.8" fill="#fff" stroke="none"/></symbol>
+    <symbol id="i-pinkcoin" viewBox="0 0 48 48"><ellipse cx="24" cy="24" rx="13.5" ry="18" fill="#FF8FC7"/><path d="M24 13v22" fill="none" stroke="#C2407F" stroke-width="3.4"/></symbol>
+    <symbol id="i-player" viewBox="0 0 48 48"><circle cx="24" cy="17" r="9" fill="#FFE3B8"/><path d="M13 14a11 9 0 0 1 22 0z" fill="#E5483B"/><path d="M14 44V33a10 10 0 0 1 20 0v11z" fill="#3D6FE0"/><circle cx="21" cy="18" r="1.5" fill="#13203F" stroke="none"/><circle cx="27" cy="18" r="1.5" fill="#13203F" stroke="none"/></symbol>
   </defs>
 </svg>
 
 <div class="wrap">
   <header class="top">
-    <div class="logo">
-      <svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-logo"/></svg>
-      <div>
-        <h1>MarioBlueprints</h1>
+    <div class="brand">
+      <svg class="brandmark" viewBox="0 0 96 96" aria-hidden="true">
+        <g transform="rotate(-8 48 48)">
+          <rect x="8" y="12" width="70" height="70" rx="12" fill="#2F6FD6" stroke="#13203F" stroke-width="4"/>
+          <path d="M8 35h70M8 58h70M31 12v70M54 12v70" stroke="#8FB6F2" stroke-width="1.6" fill="none"/>
+          <path d="M60 82l18-18v6a12 12 0 0 1-12 12z" fill="#9DC0F5" stroke="#13203F" stroke-width="3" stroke-linejoin="round"/>
+        </g>
+        <path d="M47 14a22 22 0 0 0-13 39.6c2.4 2 3.8 4.6 3.8 8V66h18.4v-4.4c0-3.4 1.4-6 3.8-8A22 22 0 0 0 47 14z" fill="#FFC93C" stroke="#13203F" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M36 44h6v-6h6v-6h7" fill="none" stroke="#E5483B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M55 27l6 5-6 3z" fill="#E5483B" stroke="#13203F" stroke-width="2" stroke-linejoin="round"/>
+        <rect x="37" y="66" width="20" height="7" rx="2" fill="#B7BCC9" stroke="#13203F" stroke-width="3.4"/>
+        <rect x="39" y="73" width="16" height="7" rx="3" fill="#8E97AB" stroke="#13203F" stroke-width="3.4"/>
+        <path d="M24 16l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#fff" stroke="#13203F" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M74 36l1.4 3.4 3.4 1.4-3.4 1.4L74 45.6l-1.4-3.4-3.4-1.4 3.4-1.4z" fill="#FFC93C" stroke="#13203F" stroke-width="1.8" stroke-linejoin="round"/>
+      </svg>
+      <div class="wordmark">
+        <h1><span class="wm-a"><span>M</span><span>a</span><span>r</span><span>i</span><span>o</span></span><span class="wm-b">Blueprints</span></h1>
         <p>Level ideas for Mario Maker builders</p>
       </div>
     </div>
@@ -442,6 +508,7 @@
           <button id="spinBtn" class="btn spin"><svg class="ic" viewBox="0 0 48 48"><use href="#i-dice"/></svg>SPIN!</button>
           <div id="legend" class="legend" role="group" aria-label="Pick a kind of level"></div>
           <p class="wheelhint">Tap one to spin for that kind of level.</p>
+          <div class="stickers"><h4>My maker stickers</h4><div id="stickRow" class="stickrow"></div></div>
         </div>
         <div id="card"></div>
       </div>
@@ -452,18 +519,15 @@
       <div class="panel stack">
         <div>
           <h2>How Music Blocks work</h2>
-          <p class="lead">Three things to know. That's it!</p>
+          <p class="lead">Three things to know. That's all!</p>
         </div>
         <div class="howto3">
           <div class="mstep">
             <span class="num">1</span>
-            <svg class="diag" viewBox="0 0 200 96" aria-hidden="true" style="stroke:#13203F;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round">
-              <use href="#i-goomba" x="18" y="6" width="42" height="42"/>
-              <path d="M64 30 C 95 10, 110 20, 118 40" fill="none" stroke-dasharray="6 6"/>
-              <path d="M110 36l8 6 2-10" fill="none"/>
-              <use href="#i-noteblock" x="110" y="44" width="44" height="44"/>
-            </svg>
-            <p>Put a Note Block. Drop a Goomba on it. Now it sings!</p>
+            <div class="recipe">
+              <span class="rbox"><svg class="ic" viewBox="0 0 48 48" style="width:64px;height:64px"><use href="#i-noteblock"/></svg></span><span class="plus">+</span><span class="rbox"><svg class="ic" viewBox="0 0 48 48" style="width:64px;height:64px"><use href="#i-goomba"/></svg></span>
+            </div>
+            <p>Put a Note Block. Drag a Goomba onto it. Now it's a Music Block!</p>
           </div>
           <div class="mstep">
             <span class="num">2</span>
@@ -471,7 +535,7 @@
               <g><rect x="30" y="70" width="22" height="22" rx="4" fill="#E5483B"/><rect x="70" y="56" width="22" height="22" rx="4" fill="#FF8A3D"/><rect x="110" y="42" width="22" height="22" rx="4" fill="#FFC93C"/><rect x="150" y="28" width="22" height="22" rx="4" fill="#22A45D"/></g>
               <path d="M40 60 L160 18" fill="none" stroke-dasharray="4 5"/><path d="M152 16l9 1-5 8" fill="none"/>
             </svg>
-            <p>Higher block = higher note.</p>
+            <p>Each square higher plays a higher note.</p>
           </div>
           <div class="mstep">
             <span class="num">3</span>
@@ -480,47 +544,59 @@
               <rect x="44" y="10" width="92" height="74" rx="6" fill="none" stroke="#E5483B" stroke-width="3.4" stroke-dasharray="8 5"/>
               <path d="M142 22h26M160 15l8 7-8 7" fill="none" stroke="#E5483B" stroke-width="3.4"/>
             </svg>
-            <p>Turn on auto-scroll. The song plays as the screen moves.</p>
+            <p>Turn on auto-scroll. The song plays as the screen moves along.</p>
           </div>
         </div>
       </div>
 
       <div class="panel stack" id="buildPanel">
         <div>
-          <h2>Build a song, one block at a time</h2>
-          <p class="lead">Pick a song. Then follow the arrows, like LEGO instructions.</p>
+          <h2>Build a song, like pixel art</h2>
+          <p class="lead">Pick a song. Then copy the picture into your level, square by square. Each colored square is one Music Block.</p>
         </div>
         <div>
           <h3 style="font-size:22px;margin-bottom:8px">1. Pick a song</h3>
           <div id="songGrid" class="songgrid" role="group" aria-label="Songs"></div>
         </div>
         <div>
-          <h3 style="font-size:22px;margin-bottom:8px">2. Pick a sound</h3>
-          <div id="soundPick" class="soundpick" role="group" aria-label="Sounds"></div>
-          <p class="note">This is what you drop on each Note Block in the game.</p>
-        </div>
-        <div>
-          <h3 style="font-size:22px;margin-bottom:8px">3. Build it</h3>
+          <h3 style="font-size:22px;margin-bottom:8px">2. Copy the picture</h3>
           <div id="builder" class="builder"></div>
         </div>
+        <div>
+          <h3 style="font-size:22px;margin-bottom:8px">3. Finish and test</h3>
+          <ul class="checks">
+            <li><label><input type="checkbox" id="ck1"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-goomba"/></svg>Drag a Goomba onto every Note Block.</label></li>
+            <li><label><input type="checkbox" id="ck2"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-arrow-r"/></svg>Turn on auto-scroll (try Slow).</label></li>
+            <li><label><input type="checkbox" id="ck3"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-play"/></svg>Play it! Too fast? Leave more squares between blocks.</label></li>
+          </ul>
+          <div class="tipline" style="margin-top:10px"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-cloudblock"/></svg><span>Does a note keep repeating? Put a Cloud Block right above that Music Block.</span></div>
+        </div>
         <details class="grown">
-          <summary>Grown-ups: spacing settings</summary>
+          <summary>Grown-ups: settings</summary>
           <div class="settings">
-            <label>Lowest note goes on row
+            <label>Lowest note: squares above the ground
               <span class="stepper"><button type="button" data-step="start" data-d="-1" aria-label="Lower">−</button><output id="startOut">3</output><button type="button" data-step="start" data-d="1" aria-label="Higher">+</button></span>
             </label>
-            <label>Spaces per beat
-              <span class="stepper"><button type="button" data-step="space" data-d="-1" aria-label="Fewer">−</button><output id="spaceOut">2</output><button type="button" data-step="space" data-d="1" aria-label="More">+</button></span>
+            <label>Squares per beat
+              <span class="stepper"><button type="button" data-step="space" data-d="-1" aria-label="Fewer">−</button><output id="spaceOut">1</output><button type="button" data-step="space" data-d="1" aria-label="More">+</button></span>
+            </label>
+            <label for="soundSel">Sound (what you drag onto the Note Block)
+              <select id="soundSel">
+                <option value="piano">Goomba (piano)</option>
+                <option value="beep">Super Mushroom (8-bit beep)</option>
+                <option value="sax">Bowser Jr. (saxophone)</option>
+                <option value="synth">Koopa Clown Car (synth)</option>
+              </select>
             </label>
           </div>
-          <p class="note">Row 1 is the very bottom row of the course. If the song is too fast in the game, add spaces. If it's too slow, remove some.</p>
+          <p class="note">In the game, songs are played by moving the screen at a steady speed. Change the squares per beat if the song sounds too fast or too slow.</p>
         </details>
       </div>
 
       <div class="panel stack">
         <div>
           <h2>Make up your own tune</h2>
-          <p class="lead">Tap the squares to add notes, then press Play. Want a song you know, like The Office theme? Find its notes by ear here, one square at a time!</p>
+          <p class="lead">Tap squares to add notes, then press Play. When you like it, tap Build my tune to get the picture.</p>
         </div>
         <div class="row">
           <button id="tunePlay" class="btn go"><svg class="ic" viewBox="0 0 48 48"><use href="#i-play"/></svg>Play my tune</button>
@@ -602,16 +678,17 @@
     { id: "boo", name: "Boo", icon: "ghost", does: "A shy ghost. It sneaks closer when you look away." },
     { id: "drybones", name: "Dry Bones", icon: "shell", does: "A bony Koopa that falls apart when stomped, then gets back up." },
     { id: "thwomp", name: "Thwomp", icon: "thwomp", does: "A grumpy stone that slams down when you walk under it." },
-    { id: "boomboom", name: "Boom Boom", icon: "crown", does: "A boss who runs and jumps at you. Stomp him 3 times." },
-    { id: "bowserjr", name: "Bowser Jr.", icon: "crown", does: "A boss! On a Note Block he plays saxophone." },
+    { id: "boomboom", name: "Boom Boom", icon: "crown", does: "A boss who runs and jumps at you. He acts a bit different in each game style.", styles: ["smb", "smb3", "smw", "nsmbu", "3dw"], checked: true },
+    { id: "pompom", name: "Pom Pom", icon: "crown", does: "A sneaky boss who throws shurikens and can split into copies.", styles: ["3dw"], checked: true },
+    { id: "bowserjr", name: "Bowser Jr.", icon: "crown", does: "A boss who shoots fireballs and hides in his shell. Hit him 3 times!", styles: ["smb", "smb3", "smw", "nsmbu"], checked: true },
     { id: "star", name: "Super Star", icon: "star", does: "You can't be hurt for a little while. Run!" },
     { id: "mushroom", name: "Super Mushroom", icon: "mushroom", does: "Makes you big so you can take one hit. On a Note Block it plays an 8-bit beep." },
-    { id: "sword", name: "Master Sword", icon: "sword", does: "Turns Mario into Link, with a sword and shield.", styles: ["smb"], checked: true },
+    { id: "sword", name: "Master Sword", icon: "sword", does: "Turns Mario into Link with a sword, shield, bombs and arrows. Shake a Super Mushroom to find it.", styles: ["smb"], checked: true },
     { id: "egg", name: "Yoshi's Egg", icon: "egg", does: "Hatches Yoshi. Ride him and eat enemies!", styles: ["smw", "nsmbu"], checked: true },
     { id: "shoe", name: "Goomba's Shoe", icon: "shoe", does: "Hop inside and stomp around, even on spikes.", styles: ["smb", "smb3"], checked: true },
     { id: "coin", name: "Coin", icon: "coin", does: "Shiny rewards. Coin trails show players the way." },
     { id: "key", name: "Key", icon: "key", does: "Opens a locked door. Hide it somewhere clever." },
-    { id: "keydoor", name: "Key Door", icon: "door", does: "A locked door. You need a Key to go through." },
+    { id: "keydoor", name: "Key Door", icon: "door", does: "A locked door. You need a Key to go through. Shake a Door twice to make one." },
     { id: "door", name: "Door", icon: "door", does: "Takes you to its matching door somewhere else." },
     { id: "pdoor", name: "P Warp Door", icon: "door", does: "Only appears for a short time after you hit a P Switch." },
     { id: "pswitch", name: "P Switch", icon: "pswitch", does: "Swaps coins and bricks, and shows P Warp Doors. Hurry!" },
@@ -620,10 +697,10 @@
     { id: "dotted", name: "Red & Blue Blocks", icon: "brick", does: "Solid or see-through, depending on the ON/OFF Switch." },
     { id: "noteblock", name: "Note Block", icon: "noteblock", does: "Bounces you. Drop an enemy or item on it to make a Music Block." },
     { id: "cloudblock", name: "Cloud Block", icon: "cloudblock", does: "A soft cloud you can stand on." },
-    { id: "lift", name: "Lift", icon: "lift", does: "A platform you ride. Put it on a Track to make it move." },
+    { id: "lift", name: "Lift", icon: "lift", does: "A platform you ride. Put it on a Track and it follows the track." },
     { id: "track", name: "Track", icon: "track", does: "Draw a path, and lifts or enemies on it ride along." },
     { id: "firebar", name: "Fire Bar", icon: "firebar", does: "A spinning bar of fireballs. Time your jump!" },
-    { id: "burner", name: "Burner", icon: "lava", does: "Blasts fire on and off. Great for airships." },
+    { id: "burner", name: "Burner", icon: "lava", does: "Shoots a 3-block flame on and off. Run past when it stops!" },
     { id: "cannon", name: "Cannon", icon: "cannon", does: "Shoots cannonballs. Airships love cannons." },
     { id: "spring", name: "Trampoline", icon: "spring", does: "Bounces you up high. Hold jump for a bigger bounce." },
     { id: "conveyor", name: "Conveyor Belt", icon: "conveyor", does: "Moves anything on it left or right." },
@@ -632,7 +709,9 @@
     { id: "ice", name: "Ice Block", icon: "ice", does: "Slippery! Hard to stop on." },
     { id: "checkpoint", name: "Checkpoint Flag", icon: "flag", does: "Touch it and you start from here if you lose a life." },
     { id: "sign", name: "Arrow Sign", icon: "sign", does: "Points players the right way." },
-    { id: "clearpipe", name: "Clear Pipe", icon: "pipe", does: "A see-through pipe that carries you along.", styles: ["3dw"], checked: true }
+    { id: "clearpipe", name: "Clear Pipe", icon: "pipe", does: "A see-through pipe that carries you along.", styles: ["3dw"], checked: true },
+    { id: "koopacar", name: "Koopa Troopa Car", icon: "koopacar", does: "Hop in and zoom through the course!", styles: ["3dw"], checked: true },
+    { id: "pinkcoin", name: "Pink Coin", icon: "pinkcoin", does: "Collect every Pink Coin and a Key appears!" }
   ];
   const P = Object.fromEntries(PARTS.map(p => [p.id, p]));
 
@@ -652,13 +731,20 @@
       style: "smw", theme: "Underwater", time: "Day", why: "Day water is safe to swim in. At night it turns to poison!",
       parts: ["cheep", "blooper", "key", "keydoor", "coin", "checkpoint"],
       steps: ["A beach, then dive in. Use slow Cheep Cheeps so players learn to swim.", "A pipe takes you inside the ship. Bloopers guard the halls. The key is in the captain's room.", "Swim back and unlock the treasure room. It's full of coins, and the flag is inside!"],
-      goal: "Reach the flag. For extra challenge, add a collect-coins clear condition.", secret: "A hidden 1-Up up in the crow's nest.", stars: 1, mins: 40 },
+      goal: "Reach the flag.", secret: "A hidden 1-Up up in the crow's nest.", stars: 1, mins: 40 },
     { w: "adventure", names: ["Goodnight Goomba", "Moon Man Begins", "The Goomba Who Jumped Over the Moon"],
       idea: "Mario is on the moon! Make floaty low-gravity jumps across cloud islands while Goombas float by.",
       style: "nsmbu", theme: "Sky", time: "Night", why: "Night Sky has low gravity, so jumps float like on the moon. Night isn't in 3D World style.",
       parts: ["cloudblock", "lift", "goomba", "coin", "star", "checkpoint"],
       steps: ["Short, safe jumps over solid ground, so players feel how floaty it is.", "Big jumps between cloud islands, and a Super Star run through floating Goombas.", "A tall climb to the flag at the top of the sky."],
       goal: "Reach the flag.", secret: "Draw a rocket out of coins high above the start.", stars: 2, mins: 40 },
+    { w: "adventure", names: ["Where the Wild Koopas Are", "Charlie and the Pink Coin Factory", "The Pink Panther-Plant"],
+      idea: "Pink coins are hidden all over a jungle. Find every one, and a key appears to open the way out!",
+      style: "nsmbu", theme: "Forest", time: "Day", why: "A forest has lots of trees and corners to hide coins in.",
+      parts: ["pinkcoin", "keydoor", "pipe", "koopa", "checkpoint"],
+      steps: ["The first pink coin is easy to see, so players learn what they're hunting for.", "Coins hidden up high, behind pipes, and in a secret room.", "The last coin gives the key. Open the Key Door to reach the flag!"],
+      goal: "Find all the pink coins, then reach the flag.", secret: "A room full of regular coins behind a pipe.", stars: 2, mins: 45 },
+
     { w: "puzzle", names: ["Switch and Punishment", "The Switch Who Stole Christmas", "Red Block, Blue Block"],
       idea: "One ON/OFF switch flips the red and blue blocks. Flip it at just the right time to climb the castle tower.",
       style: "smb3", theme: "Castle", time: "Day", why: "Castles make the climb feel like a big challenge.",
@@ -671,30 +757,51 @@
       parts: ["pipe", "pswitch", "pdoor", "coin", "boo"],
       steps: ["Two pipes. One goes back to the start, one goes on. Players learn that pipes can trick you.", "Four pipes! A coin trail near the right one is a hint.", "Hit the P Switch. A P Warp Door shows up for a short time. Run through it to the flag!"],
       goal: "Reach the flag.", secret: "One wrong pipe hides a room full of coins.", stars: 2, mins: 40 },
+    { w: "puzzle", names: ["Charlie and the Coin Factory", "Brick or Treat", "Coin-fused"],
+      idea: "Hit a P Switch and coins turn into bricks. Use it to build bridges and open walls, fast!",
+      style: "smb", theme: "Underground", time: "Day", why: "Underground rooms are great for block puzzles.",
+      parts: ["pswitch", "coin", "brick", "pipe", "checkpoint"],
+      steps: ["A gap with a line of coins over it. Hit the P Switch and the coins become a bridge!", "A brick wall blocks the way. The P Switch turns it into coins you can walk through.", "Use both tricks in one room, then reach the flag."],
+      goal: "Reach the flag.", secret: "A second P Switch hidden in a brick.", stars: 2, mins: 40 },
+
     { w: "speed", names: ["For Whom the Shell Rolls", "Shell Yeah!", "Brawl of the Shell"],
       idea: "Kick a shell down a hill and chase it! It knocks out every enemy in your way. Keep up before time runs out.",
       style: "smw", theme: "Ground", time: "Day", why: "Hills are perfect for a rolling shell.",
       parts: ["koopa", "slope", "goomba", "brick", "coin", "spring"],
       steps: ["Stomp the Koopa, grab its shell, and kick it down the first hill.", "Rows of Goombas and bricks that the shell smashes for you.", "A trampoline launch to the flag."],
-      goal: "Reach the flag before a short timer runs out.", secret: "A pipe shortcut near the start.", stars: 2, mins: 30 },
+      goal: "Reach the flag before the timer runs out. Try setting it to 100.", secret: "A pipe shortcut near the start.", stars: 2, mins: 30 },
     { w: "speed", names: ["Mushroom: Impossible", "Star Wars: A New Run", "Twinkle Twinkle Little Dash"],
       idea: "Grab a Super Star and blast through a crowd of enemies before it wears off. Another star waits just in time!",
       style: "nsmbu", theme: "Ground", time: "Day", why: "An open, sunny level makes it easy to go fast.",
       parts: ["star", "goomba", "koopa", "conveyor", "spring"],
       steps: ["A Super Star right at the start and a few Goombas to smash.", "A conveyor belt speeds you up. Put the next star just before the first one runs out.", "A trampoline launch over the last crowd to the flag."],
-      goal: "Reach the flag before a short timer runs out (try 100).", secret: "A row of coins up high for players who jump.", stars: 1, mins: 30 },
+      goal: "Reach the flag before the timer runs out. Try 100.", secret: "A row of coins up high for players who jump.", stars: 1, mins: 30 },
+    { w: "speed", names: ["Slip 'N Slide", "The Ice Age Race", "Frozen Pipes"],
+      idea: "A slippery ice run! Ice Blocks make you slide, and trampolines bounce you over the gaps.",
+      style: "smb3", theme: "Snow", time: "Day", why: "Snow and ice go together, and slipping makes speed runs silly.",
+      parts: ["ice", "spring", "coin", "goomba", "sign"],
+      steps: ["Flat ice so players feel how slippery it is. No gaps yet!", "Ice ramps with trampolines to bounce over small gaps.", "One long slide straight into the flag."],
+      goal: "Reach the flag before the timer runs out. Try 60.", secret: "A coin arrow pointing to a hidden 1-Up.", stars: 2, mins: 30 },
+
     { w: "ride", names: ["Green Eggs and Yoshi", "How to Train Your Yoshi", "Dino Man"],
-      idea: "Hatch Yoshi and ride him through a forest. Eat enemies, and keep him all the way to the flag!",
+      idea: "Hatch Yoshi and ride him through a forest. Eat enemies, and try to keep him all the way to the flag!",
       style: "smw", theme: "Forest", time: "Day", why: "Yoshi's Egg is only in Super Mario World and New Super Mario Bros. U styles.",
       parts: ["egg", "goomba", "koopa", "coin", "checkpoint"],
       steps: ["Put Yoshi's Egg in a ? Block at the start. Hop on!", "Gaps that are easy with Yoshi and hard without him. Enemies are snacks.", "One last long gap, then the flag."],
-      goal: "Reach the flag while still riding Yoshi.", secret: "A pipe up high that only Yoshi can reach.", stars: 1, mins: 35 },
+      goal: "Reach the flag. Bonus challenge: keep Yoshi the whole way!", secret: "A pipe up high that only Yoshi can reach.", stars: 1, mins: 35 },
     { w: "ride", names: ["Lord of the Rails", "The Lava Express", "Hot Lava Choo-Choo"],
       idea: "Ride a lift on a track through a lava castle while Fire Bars spin all around you.",
-      style: "smw", theme: "Castle", time: "Day", why: "Castles have lava underneath, which makes the ride feel exciting.",
+      style: "smw", theme: "Castle", time: "Day", why: "Castles have lava, and you can raise it higher to make the ride exciting.",
       parts: ["track", "lift", "firebar", "coin", "checkpoint"],
       steps: ["Put a Lift on a Track over solid ground, so players learn to ride it safely.", "The track goes over lava. Fire Bars spin next to the path. Coins show when to jump.", "The track climbs up, up, up to the flag."],
       goal: "Reach the flag.", secret: "A coin arrow on the ceiling points to a hidden 1-Up.", stars: 2, mins: 40 },
+    { w: "ride", names: ["Planes, Trains and Koopa Cars", "Fast and Furry-ous", "Car-nival Ride"],
+      idea: "Jump in a Koopa Troopa Car and zoom through a sky road. Then ride Clear Pipes to the finish!",
+      style: "3dw", theme: "Sky", time: "Day", why: "The Koopa Troopa Car and Clear Pipes are only in Super Mario 3D World style.",
+      parts: ["koopacar", "clearpipe", "goomba", "coin", "checkpoint"],
+      steps: ["Park the car at the start on a flat road so players learn to drive.", "Bumpy roads with Goombas to zoom over, and coins to collect.", "Jump out and slide through Clear Pipes to the flag!"],
+      goal: "Reach the flag.", secret: "A Clear Pipe that leads to a coin room.", stars: 1, mins: 35 },
+
     { w: "boss", names: ["The Sword in the Thwomp", "The Legend of Swordo", "Link's A-Wake-Up Call"],
       idea: "Mario becomes Link! Find the Master Sword, explore a dungeon, find the key and beat the boss.",
       style: "smb", theme: "Castle", time: "Day", why: "The Master Sword only works in Super Mario Bros. style.",
@@ -703,28 +810,35 @@
       goal: "Beat Boom Boom, then reach the flag.", secret: "A hidden block leads to a secret 1-Up room.", stars: 2, mins: 50 },
     { w: "boss", names: ["Diary of a Wimpy Jr.", "The Jr. Strikes Back", "Jr. and the Chamber of Secrets"],
       idea: "Sneak across Bowser Jr.'s airship and dodge cannonballs and fire. Then beat Jr. in his room!",
-      style: "smb3", theme: "Airship", time: "Day", why: "Airships are Bowser Jr.'s home in Super Mario Bros. 3.",
+      style: "smb3", theme: "Airship", time: "Day", why: "Airships are Bowser Jr.'s home in Super Mario Bros. 3. He isn't in 3D World style.",
       parts: ["bowserjr", "cannon", "burner", "lift", "mushroom", "checkpoint"],
       steps: ["Climb aboard. A few slow cannons teach players to dodge.", "Jump across moving lifts between two ships while burners blast fire.", "Bowser Jr.'s room. Put a Super Mushroom right before the fight."],
       goal: "Beat Bowser Jr., then reach the flag.", secret: "A pipe under the ship leads to a coin room.", stars: 2, mins: 45 },
+    { w: "boss", names: ["Kung Fu Pom Pom", "Pom Pom and Circumstance", "The Karate Kid-napper"],
+      idea: "A ninja castle! Climb past spinning fire and doors, then face Pom Pom, who can make copies of herself.",
+      style: "3dw", theme: "Castle", time: "Day", why: "Pom Pom is only in Super Mario 3D World style.",
+      parts: ["pompom", "firebar", "door", "mushroom", "checkpoint"],
+      steps: ["A castle gate and a Super Mushroom to get ready.", "Rooms joined by doors, with Fire Bars to time your jumps.", "Pom Pom's room! Beat her to reach the flag."],
+      goal: "Beat Pom Pom, then reach the flag.", secret: "A door that leads to a coin room.", stars: 2, mins: 45 },
+
     { w: "music", names: ["Block Party", "Don't Tetris Me Now", "The Falling Block Boogie"], song: "tetris",
       idea: "Don't touch anything! The screen moves by itself while Music Blocks play the Tetris song.",
       style: "smb", theme: "Ground", time: "Day", why: "A simple, flat level lets the song be the star. Use slow auto-scroll.",
       parts: ["noteblock", "goomba", "sign"],
-      steps: ["An arrow sign and a flat floor. Tell the player to relax.", "The song! Build it block by block in the Music Blocks tab.", "One last big note, then the flag."],
+      steps: ["An arrow sign and a flat floor. Tell the player to relax.", "The song! Copy the picture in the Music Blocks tab.", "One last big note, then the flag."],
       goal: "Reach the flag.", secret: "Hide a second song in a sub-area.", stars: 1, mins: 45 },
     { w: "music", names: ["In the Hall of the Mountain Boo", "Night at the Boo-seum", "Boo-dunit"], song: "mountain",
       idea: "A spooky song! The screen slides through a haunted house while Music Blocks play 'In the Hall of the Mountain King'.",
       style: "smw", theme: "Ghost House", time: "Day", why: "The song sounds sneaky and spooky, just like a ghost house.",
       parts: ["noteblock", "goomba", "boo", "sign"],
-      steps: ["A sign that says 'Shhh...' and a floor to stand on.", "Build the song with the Build-Along in the Music Blocks tab.", "Put the last blocks closer together so the song speeds up at the end!"],
-      goal: "Reach the flag.", secret: "Boos hiding in the ceiling that only show up when you look back.", stars: 2, mins: 50 },
-    { w: "music", names: ["The Off-Ice", "Dunder Mifflin on Ice", "That's What Shell Said"], song: null,
-      idea: "A snowy music level that plays The Office theme. Pick out the tune by ear, then build it!",
-      style: "nsmbu", theme: "Snow", time: "Day", why: "Snow levels look like a winter office party.",
-      parts: ["noteblock", "goomba", "ice", "sign"],
-      steps: ["Find the tune by ear in the Tune Maker (Music Blocks tab).", "Tap Build my tune and follow the arrows.", "End with a big line of coins spelling THE END."],
-      goal: "Reach the flag.", secret: "A Super Star hidden in an ice block.", stars: 3, mins: 60 }
+      steps: ["A sign that says 'Shhh...' and a floor to stand on.", "Copy the song picture from the Music Blocks tab.", "Put the last blocks closer together so the song speeds up at the end!"],
+      goal: "Reach the flag.", secret: "Boos hiding near the ceiling.", stars: 2, mins: 50 },
+    { w: "music", names: ["Ode to Toad", "Joy to the Whirled", "Sky-mphony No. 9"], song: "ode",
+      idea: "Float through the clouds while Music Blocks play 'Ode to Joy'. Calm, happy and pretty.",
+      style: "nsmbu", theme: "Sky", time: "Day", why: "Clouds and a sunny sky match a calm, happy song.",
+      parts: ["noteblock", "goomba", "cloudblock", "coin"],
+      steps: ["A cloud to stand on and a coin arrow pointing right.", "Copy the song picture from the Music Blocks tab.", "Write 'THE END' in coins before the flag."],
+      goal: "Reach the flag.", secret: "A hidden coin heart in the sky.", stars: 1, mins: 40 }
   ];
   const EXTRA_NAMES = ["Pipe Hard", "Toad Story", "Charlie and the Coin Factory", "Where the Wild Koopas Are", "The Very Hungry Piranha Plant", "Lord of the Springs", "If You Give a Goomba a Mushroom", "How to Train Your Dry Bones", "The Goomba Strikes Back", "Diary of a Wimpy Goomba"];
 
@@ -766,8 +880,28 @@
     const base = angle - (angle % 360);
     angle = base + 360 * 4 + target + (Math.random() * 30 - 15);
     rot.style.transform = `rotate(${angle}deg)`;
-    const done = () => { spinning = false; showIdea(pickIdea(wi), true); };
+    if (!reduced) ticks();
+    const done = () => { spinning = false; showIdea(pickIdea(wi), true); ding(); if (!reduced) burst($("#card")); };
     if (reduced) done(); else setTimeout(done, 2650);
+  }
+  function ticks() {
+    const c = ctx(); if (!c) return;
+    const g = c.createGain(); g.gain.value = 0.12; g.connect(c.destination);
+    let t = 0;
+    for (let k = 0; k < 26; k++) {
+      t += 0.03 + Math.pow(k / 26, 2.2) * 0.22;
+      if (t > 2.55) break;
+      const o = c.createOscillator(), e = c.createGain();
+      o.type = "square"; o.frequency.value = 1500; o.connect(e); e.connect(g);
+      const at = c.currentTime + t;
+      e.gain.setValueAtTime(0.8, at); e.gain.exponentialRampToValueAtTime(0.001, at + 0.03);
+      o.start(at); o.stop(at + 0.04);
+    }
+  }
+  function ding() {
+    const c = ctx(); if (!c) return;
+    const g = c.createGain(); g.gain.value = 0.5; g.connect(c.destination);
+    [0, 4, 7, 12].forEach((n, k) => tone(c, g, 72 + n, c.currentTime + k * 0.07, 0.3, "beep"));
   }
   const spin = () => spinTo(Math.floor(Math.random() * WEDGES.length));
   $("#spinBtn").addEventListener("click", spin);
@@ -784,6 +918,43 @@
     if (w) spinTo(Number(w.dataset.w));
   });
 
+
+  const THEME_BG = {
+    Ground: ["#8FD3FF", "#C87B3E", "#4DB654"], Underground: ["#23304F", "#3E7FC4", "#5C95D6"], Underwater: ["#2E8FD0", "#E7C98A", "#F2DDA8"],
+    "Ghost House": ["#3B2C5C", "#6B5A3A", "#8C7650"], Castle: ["#5A5F70", "#8E97AB", "#B7BCC9"], Airship: ["#F6A45C", "#9A6A3C", "#B98552"],
+    Forest: ["#6FC7A8", "#8B5A2B", "#3FA75A"], Sky: ["#A9DBFF", "#FFFFFF", "#E3F1FF"], Desert: ["#FFD27A", "#E0A95A", "#F2C572"], Snow: ["#CFE8FF", "#FFFFFF", "#E6F2FF"]
+  };
+  function sceneSVG(d) {
+    const [sky, ground, top] = THEME_BG[d.theme] || THEME_BG.Ground;
+    const night = d.time === "Night";
+    const W = 600, H = 170;
+    let g = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="A picture of the level idea">`;
+    g += `<rect width="${W}" height="${H}" fill="${night ? "#1C2447" : sky}"/>`;
+    if (night) for (let k = 0; k < 18; k++) g += `<circle cx="${(k * 97) % W}" cy="${(k * 53) % 90 + 10}" r="${k % 3 ? 1.5 : 2.5}" fill="#FFF6C8"/>`;
+    else if (d.theme !== "Underground" && d.theme !== "Castle" && d.theme !== "Ghost House") {
+      g += `<use href="#i-sky" x="60" y="12" width="70" height="70" opacity=".9" style="stroke:none"/><use href="#i-sky" x="400" y="4" width="56" height="56" opacity=".8" style="stroke:none"/>`;
+    }
+    if (night) g += `<use href="#i-moon" x="520" y="12" width="46" height="46" style="stroke:#13203F;stroke-width:2"/>`;
+    g += `<rect y="${H - 34}" width="${W}" height="34" fill="${ground}" stroke="#13203F" stroke-width="3"/><rect y="${H - 34}" width="${W}" height="8" fill="${top}"/>`;
+    const parts = d.parts.filter(id => id !== "checkpoint");
+    const n = parts.length, step = (W - 170) / Math.max(1, n - 1);
+    parts.forEach((id, k) => {
+      const x = 80 + k * step, y = H - 34 - 56 - (k % 2 ? 22 : 0);
+      g += `<g transform="translate(${x - 26} ${y})"><circle cx="26" cy="26" r="29" fill="#fff" stroke="#13203F" stroke-width="3"/><use href="#i-${P[id].icon}" x="4" y="4" width="44" height="44" style="stroke:#13203F;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"/></g>`;
+    });
+    g += `<path d="M30 ${H - 50} Q ${W / 2} ${H - 150} ${W - 60} ${H - 50}" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round" opacity=".9"/>`;
+    g += `<use href="#i-player" x="12" y="${H - 34 - 44}" width="44" height="44" style="stroke:#13203F;stroke-width:2.4"/>`;
+    g += `<use href="#i-flagpole" x="${W - 62}" y="${H - 34 - 70}" width="64" height="70" style="stroke:#13203F;stroke-width:2.4"/>`;
+    g += `</svg>`;
+    return g;
+  }
+  let built = store.get("mb.built", {});
+  function renderStickers() {
+    $("#stickRow").innerHTML = WEDGES.map(w => {
+      const n = built[w.id] || 0;
+      return `<span class="sticker ${n ? "" : "off"}" style="background:${n ? w.color : "#fff"}" title="${esc(w.name)}: built ${n}">${ic(w.icon)}${n ? `<b>${n}</b>` : ""}</span>`;
+    }).join("");
+  }
   const starsHTML = n => `<span class="stars" aria-label="${n} of 3 stars">${[1, 2, 3].map(k => ic("star", k > n ? "off" : "")).join("")}</span>`;
 
   function showIdea(idx, flip) {
@@ -796,6 +967,7 @@
         ${ic(w.icon)}<span class="kind">${esc(w.name)}</span>
         <span class="meta"><span class="pill">${starsHTML(d.stars)}</span><span class="pill">${ic("watch")}about ${d.mins} min</span></span>
       </div>
+      <div class="scenebox">${sceneSVG(d)}</div>
       <div class="cardbody">
         <div class="namebox">
           <label for="nameInput">Level name (make up your own!)</label>
@@ -833,6 +1005,7 @@
         <div class="cardactions">
           <button class="btn go" id="saveBtn">${ic("save")}Save</button>
           <button class="btn" id="readBtn">${ic("speaker")}Read it to me</button>
+          <button class="btn built" id="builtBtn">${ic("star")}I built it!</button>
           ${musicBtn}
           <button class="btn" id="againBtn" style="margin-left:auto">${ic("dice")}Spin again</button>
         </div>
@@ -862,6 +1035,13 @@
       showTab("music");
       if (mb.dataset.goMusic) { selectSong(mb.dataset.goMusic); $("#buildPanel").scrollIntoView({ behavior: reduced ? "auto" : "smooth" }); }
       else $("#tuneGrid").scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+      return;
+    }
+    const bb = e.target.closest("#builtBtn");
+    if (bb) {
+      built[d.w] = (built[d.w] || 0) + 1; store.set("mb.built", built);
+      renderStickers(); burst(bb); ding();
+      bb.innerHTML = ic("star") + "Sticker earned!";
       return;
     }
     const sb = e.target.closest("#saveBtn");
@@ -987,13 +1167,7 @@
     birthday: { name: "Happy Birthday", n: [[-5,1],[-5,1],[-3,2],[-5,2],[0,2],[-1,4],[-5,1],[-5,1],[-3,2],[-5,2],[2,2],[0,4]] },
     jingle: { name: "Jingle Bells", n: [[4,2],[4,2],[4,4],[4,2],[4,2],[4,4],[4,2],[7,2],[0,3],[2,1],[4,8]] }
   };
-  const SOUNDS = [
-    { id: "piano", who: "Goomba", what: "piano", icon: "goomba" },
-    { id: "beep", who: "Super Mushroom", what: "8-bit beep", icon: "mushroom" },
-    { id: "sax", who: "Bowser Jr.", what: "saxophone", icon: "crown" },
-    { id: "synth", who: "Koopa Clown Car", what: "synth chords", icon: "sky" }
-  ];
-  const music = { song: "tetris", sound: "piano", start: 3, space: 2, step: 0, custom: null };
+  const music = { song: "tetris", sound: "piano", start: 3, space: 1, part: 0, done: {}, custom: null };
 
   function events() {
     if (music.song === "custom") return music.custom || [];
@@ -1003,88 +1177,81 @@
   const songName = () => music.song === "custom" ? "My tune" : SONGS[music.song].name;
 
   function renderSongs() {
-    $("#songGrid").innerHTML = Object.entries(SONGS).map(([k, s]) => `<button class="songbtn" data-song="${k}" aria-pressed="${k === music.song}">${ic("note")}${esc(s.name)}</button>`).join("")
+    $("#songGrid").innerHTML = Object.entries(SONGS).map(([k, sg]) => `<button class="songbtn" data-song="${k}" aria-pressed="${k === music.song}">${ic("note")}${esc(sg.name)}</button>`).join("")
       + (music.custom ? `<button class="songbtn" data-song="custom" aria-pressed="${music.song === "custom"}">${ic("pencil")}My tune</button>` : "");
-    $("#soundPick").innerHTML = SOUNDS.map(s => `<button class="soundbtn" data-sound="${s.id}" aria-pressed="${s.id === music.sound}">${ic(s.icon)}<span>${esc(s.who)} <span style="font-weight:700">(${esc(s.what)})</span></span></button>`).join("");
   }
-  function selectSong(k) { stopAll(); music.song = k; music.step = 0; renderSongs(); renderBuilder(true); }
-  $("#songGrid").addEventListener("click", e => { const b = e.target.closest("[data-song]"); if (b) selectSong(b.dataset.song); });
-  $("#soundPick").addEventListener("click", e => {
-    const b = e.target.closest("[data-sound]"); if (!b) return;
-    music.sound = b.dataset.sound; renderSongs();
-    const ev = events()[music.step]; if (ev) hear(ev.off);
-  });
+  function selectSong(k) { stopAll(); music.song = k; music.part = 0; renderSongs(); renderBuilder(); }
+  $("#songGrid").addEventListener("click", e => { const b = e.target.closest("[data-song]"); if (b) { selectSong(b.dataset.song); play(events(), 0.2); } });
+  $("#soundSel").addEventListener("change", e => { music.sound = e.target.value; hear(0); });
 
-  function renderBuilder(scrollStart) {
+  const PER = 8;
+  function renderBuilder() {
     const ev = events();
     const box = $("#builder");
-    if (!ev.length) { box.innerHTML = `<p class="note">Tap some squares in the Tune Maker first.</p>`; return; }
+    if (!ev.length) { box.innerHTML = `<p class="note">Tap some squares in the tune maker first.</p>`; return; }
+    const parts = Math.ceil(ev.length / PER);
+    music.part = Math.min(music.part, parts - 1);
     const min = Math.min(...ev.map(e => e.off)), max = Math.max(...ev.map(e => e.off));
     const rowOf = e => music.start + e.off - min;
-    const i = music.step, cur = ev[i], prev = ev[i - 1];
-    const done = i >= ev.length;
-    const T = 22, topRow = music.start + (max - min) + 2;
-    const width = (ev[ev.length - 1].col * music.space + 3) * T + 16, height = (topRow + 1) * T + 8;
-    const X = e => 8 + (e.col * music.space + 1) * T, Y = r => height - 8 - r * T;
-    let s = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Where the blocks go">`;
-    for (let r = 1; r <= topRow; r++) s += `<line x1="0" x2="${width}" y1="${Y(r)}" y2="${Y(r)}" stroke="#EDF2FB"/>`;
-    s += `<rect x="0" y="${Y(1)}" width="${width}" height="${T + 8}" fill="#C87B3E"/><rect x="0" y="${Y(1)}" width="${width}" height="5" fill="#4DB654"/>`;
-    ev.forEach((e, k) => {
-      const x = X(e), y = Y(rowOf(e) + 1);
-      if (k < i || done) s += `<rect x="${x}" y="${y}" width="${T - 1}" height="${T - 1}" rx="3" fill="${colorFor(e.off)}" stroke="#13203F" stroke-width="1.5"/>`;
-      else if (k === i) s += `<rect x="${x - 3}" y="${y - 3}" width="${T + 5}" height="${T + 5}" rx="4" fill="${colorFor(e.off)}" stroke="#13203F" stroke-width="3.5"><animate attributeName="opacity" values="1;.45;1" dur="1s" repeatCount="indefinite"/></rect>`;
-      else s += `<rect x="${x + 1}" y="${y + 1}" width="${T - 3}" height="${T - 3}" rx="3" fill="none" stroke="#B7C6E4" stroke-width="1.5" stroke-dasharray="3 2"/>`;
-    });
-    if (!done && prev) {
-      const x0 = X(prev) + T / 2, y0 = Y(rowOf(prev) + 1) + T / 2, x1 = X(cur) + T / 2, y1 = Y(rowOf(cur) + 1) + T / 2;
-      s += `<path d="M${x0} ${y0} H${x1} V${y1 + (y1 > y0 ? -10 : 10)}" fill="none" stroke="#13203F" stroke-width="2.5" stroke-dasharray="4 3"/>`;
+    const X = e => e.col * music.space;
+    const i0 = music.part * PER, grp = ev.slice(i0, i0 + PER), prev = ev[i0 - 1];
+    const x0 = (prev ? X(prev) : X(grp[0])) - 2, x1 = X(grp[grp.length - 1]) + 2;
+    const topRow = music.start + (max - min) + 1;
+    const W = 30, LW = 30, BOT = 26;
+    const cols = x1 - x0 + 1, width = LW + cols * W + 4, height = (topRow + 1) * W + BOT;
+    const cx = x => LW + (x - x0) * W, cy = r => (topRow - r) * W;
+    let g = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Picture of where the Music Blocks go" font-family="Nunito, sans-serif">`;
+    for (let r = 1; r <= topRow; r++) {
+      g += `<rect x="${LW}" y="${cy(r)}" width="${cols * W}" height="${W}" fill="${r % 2 ? "#FFFFFF" : "#F5F8FE"}"/>`;
+      g += `<text x="${LW - 6}" y="${cy(r) + W / 2 + 5}" text-anchor="end" font-size="13" font-weight="900" fill="#4A5578">${r}</text>`;
     }
-    s += `</svg>`;
-
-    let moves;
-    if (done) {
-      moves = `<div class="move" style="flex-basis:100%">${ic("star")}<div><div class="big">Song done!</div><div class="small">Now test it: turn on auto-scroll (try Slow) and press play. Too fast? Put the blocks further apart. Too slow? Closer together.</div></div></div>`;
-    } else if (i === 0) {
-      moves = `<div class="move"><span class="arrow" style="background:#EAF3FF">${ic("arrow-u")}</span><div><div class="big">${rowOf(cur)} rows up</div><div class="small">Put block 1 this many rows up from the very bottom of the course.</div></div></div>
-        <div class="move"><span class="arrow" style="background:#EAF3FF">${ic("goomba")}</span><div><div class="big">Drop a ${esc(SOUNDS.find(x => x.id === music.sound).who)}</div><div class="small">on every block you place.</div></div></div>`;
-    } else {
-      const dx = (cur.col - prev.col) * music.space, dy = rowOf(cur) - rowOf(prev);
-      const vert = dy === 0
-        ? `<span class="arrow" style="background:#F1F3F7">${ic("same")}</span><div><div class="big">Same row</div><div class="small">Stay at the same height.</div></div>`
-        : `<span class="arrow" style="background:${dy > 0 ? "#E4ECFF" : "#FFE6E3"}">${ic(dy > 0 ? "arrow-u" : "arrow-d")}</span><div><div class="big">${dy > 0 ? "Up" : "Down"} ${Math.abs(dy)}</div><div class="small">${Math.abs(dy) === 1 ? "row" : "rows"} from the last block</div></div>`;
-      const horiz = dx === 0
-        ? `<span class="arrow" style="background:#F1F3F7">${ic("noteblock")}</span><div><div class="big">Same spot</div><div class="small">Stack it right above or below the last block.</div></div>`
-        : `<span class="arrow" style="background:#E3F6EA">${ic("arrow-r")}</span><div><div class="big">Right ${dx}</div><div class="small">spaces from the last block</div></div>`;
-      moves = `<div class="move">${horiz}</div><div class="move">${vert}</div>`;
-    }
+    for (let x = x0; x <= x1 + 1; x++) g += `<line x1="${cx(x)}" x2="${cx(x)}" y1="0" y2="${cy(0)}" stroke="#DCE5F5"/>`;
+    for (let r = 1; r <= topRow + 1; r++) g += `<line x1="${LW}" x2="${LW + cols * W}" y1="${cy(r) + W}" y2="${cy(r) + W}" stroke="#DCE5F5"/>`;
+    g += `<rect x="${LW}" y="${cy(0)}" width="${cols * W}" height="${W}" fill="#C87B3E"/><rect x="${LW}" y="${cy(0)}" width="${cols * W}" height="6" fill="#4DB654"/>`;
+    g += `<text x="${LW - 6}" y="${cy(0) + W / 2 + 5}" text-anchor="end" font-size="11" font-weight="900" fill="#4A5578">0</text>`;
+    const first = X(ev[0]);
+    for (let x = x0; x <= x1; x++) { const n = x - first + 1; if (n >= 1) g += `<text x="${cx(x) + W / 2}" y="${height - 8}" text-anchor="middle" font-size="11" font-weight="800" fill="#98A3BD">${n}</text>`; }
+    if (!prev) g += `<use href="#i-player" x="${cx(x0)}" y="${cy(1)}" width="${W}" height="${W}" style="stroke:#13203F;stroke-width:2.4"/>`;
+    const drawBlk = (e, n, ghost) => {
+      const x = cx(X(e)), y = cy(rowOf(e));
+      return `<g class="blk" data-n="${n}" opacity="${ghost ? 0.35 : 1}"><rect x="${x + 2}" y="${y + 2}" width="${W - 4}" height="${W - 4}" rx="5" fill="${colorFor(e.off)}" stroke="#13203F" stroke-width="2.5"/><text x="${x + W / 2}" y="${y + W / 2 + 5}" text-anchor="middle" font-size="14" font-weight="900" fill="#13203F">${n}</text></g>`;
+    };
+    if (prev) g += drawBlk(prev, i0, true);
+    grp.forEach((e, k) => { g += drawBlk(e, i0 + k + 1, false); });
+    g += `</svg>`;
+    const tabs = Array.from({ length: parts }, (_, k) => `<button class="parttab ${music.done[k] ? "done" : ""}" data-part="${k}" aria-pressed="${k === music.part}">${music.done[k] ? "✓ " : ""}Part ${k + 1}</button>`).join("");
     box.innerHTML = `
-      <div class="row" style="justify-content:space-between"><span class="count">${done ? esc(songName()) + ": all built!" : `Block ${i + 1} of ${ev.length}`}</span><span class="note">${esc(songName())}</span></div>
-      <div class="progress" aria-hidden="true"><i style="width:${Math.round(Math.min(i, ev.length) / ev.length * 100)}%"></i></div>
-      <div class="scene" id="scene">${s}</div>
-      <div class="moves">${moves}</div>
+      <div class="row" style="justify-content:space-between"><span class="count">${esc(songName())}</span><span class="note">Blocks ${i0 + 1} to ${i0 + grp.length} of ${ev.length}</span></div>
+      <div class="parttabs" role="group" aria-label="Song parts">${tabs}</div>
+      <p class="copyhint">Count the squares up from the ground (the numbers on the left) and put each numbered block in the same spot. Tap a block to hear it.</p>
+      <div class="copygrid" id="copygrid">${g}</div>
       <div class="navrow">
-        <button class="btn" id="bBack" ${i === 0 ? "disabled" : ""}>Back</button>
-        <button class="btn" id="bHear">${ic("speaker")}Hear it</button>
-        <button class="btn go" id="bSong">${ic("play")}Whole song</button>
-        <button class="btn spin" id="bNext" style="font-size:24px;min-height:60px;padding:8px 24px">${done ? "Start over" : "Next"}</button>
+        <button class="btn go" id="bPart">${ic("play")}Play this part</button>
+        <button class="btn" id="bSong">${ic("speaker")}Whole song</button>
+        <button class="btn spin" id="bNext" style="font-size:22px;min-height:58px;padding:8px 22px">${music.part < parts - 1 ? "I built it! Next part" : "I built it all!"}</button>
       </div>`;
-    const sc = $("#scene");
-    if (scrollStart) sc.scrollLeft = 0;
-    else if (!done) sc.scrollLeft = Math.max(0, X(cur) - sc.clientWidth / 2);
+    box._grp = grp; box._i0 = i0; box._parts = parts;
   }
   $("#builder").addEventListener("click", e => {
-    const ev = events();
-    if (e.target.closest("#bNext")) {
-      if (music.step >= ev.length) music.step = 0; else music.step++;
-      renderBuilder(music.step === 0);
-      const c = ev[music.step]; if (c) hear(c.off); else burst($("#builder"));
-    } else if (e.target.closest("#bBack")) {
-      music.step = Math.max(0, music.step - 1); renderBuilder(false);
-      const c = ev[music.step]; if (c) hear(c.off);
-    } else if (e.target.closest("#bHear")) {
-      const c = ev[Math.min(music.step, ev.length - 1)]; if (c) hear(c.off);
-    } else if (e.target.closest("#bSong")) {
-      play(ev, 0.2, () => {});
+    const box = $("#builder"), ev = events();
+    const blk = e.target.closest(".blk");
+    if (blk) { const n = Number(blk.dataset.n); if (ev[n - 1]) hear(ev[n - 1].off); return; }
+    const t = e.target.closest("[data-part]");
+    if (t) { music.part = Number(t.dataset.part); renderBuilder(); return; }
+    if (e.target.closest("#bPart")) {
+      const grp = box._grp, base = grp[0].col, i0 = box._i0;
+      play(grp.map(x => ({ ...x, col: x.col - base })), 0.25, k => {
+        $$("#copygrid .blk").forEach(b => b.classList.toggle("now", Number(b.dataset.n) === i0 + k + 1));
+      });
+      return;
+    }
+    if (e.target.closest("#bSong")) { play(ev, 0.2); return; }
+    const nx = e.target.closest("#bNext");
+    if (nx) {
+      music.done[music.part] = true;
+      burst(nx);
+      if (music.part < box._parts - 1) music.part++;
+      renderBuilder();
     }
   });
   $$("[data-step]").forEach(b => b.addEventListener("click", () => {
@@ -1092,7 +1259,7 @@
     if (b.dataset.step === "start") music.start = Math.min(20, Math.max(1, music.start + d));
     else music.space = Math.min(6, Math.max(1, music.space + d));
     $("#startOut").textContent = music.start; $("#spaceOut").textContent = music.space;
-    renderBuilder(false);
+    renderBuilder();
   }));
 
   // audio
@@ -1120,24 +1287,23 @@
     else { g.gain.setValueAtTime(peak, t + Math.max(0.02, dur - 0.05)); g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.08); }
   }
   function hear(off) { const c = ctx(); if (!c) return; const g = c.createGain(); g.connect(c.destination); tone(c, g, 72 + off, c.currentTime + 0.01, 0.35, music.sound); }
+  let timers = [];
   function stopAll() {
     if (master) { try { master.gain.setValueAtTime(0, actx.currentTime); master.disconnect(); } catch (e) {} master = null; }
-    cancelAnimationFrame(raf);
-    $$(".tune8 button.now").forEach(b => b.classList.remove("now"));
+    timers.forEach(clearTimeout); timers = [];
+    $$(".tune8 button.now, #copygrid .blk.now").forEach(b => b.classList.remove("now"));
   }
-  function play(evs, step, onFrame) {
+  function play(evs, step, onNote) {
     const c = ctx(); if (!c) return;
     stopAll();
     master = c.createGain(); master.gain.value = 0.9; master.connect(c.destination);
     const t0 = c.currentTime + 0.08; let end = 0;
-    evs.forEach(e => { tone(c, master, 72 + e.off, t0 + e.col * step, e.dur * step, music.sound); end = Math.max(end, (e.col + e.dur) * step); });
-    const mine = master;
-    const loop = () => {
-      if (master !== mine) return;
-      onFrame((c.currentTime - t0) / step);
-      if (c.currentTime - t0 < end + 0.3) raf = requestAnimationFrame(loop); else stopAll();
-    };
-    raf = requestAnimationFrame(loop);
+    evs.forEach((e, k) => {
+      tone(c, master, 72 + e.off, t0 + e.col * step, e.dur * step, music.sound);
+      end = Math.max(end, (e.col + e.dur) * step);
+      if (onNote) timers.push(setTimeout(() => onNote(k, e), (0.08 + e.col * step) * 1000));
+    });
+    timers.push(setTimeout(stopAll, (end + 0.5) * 1000));
   }
 
   // tune maker: 8 notes x 8 steps
@@ -1163,10 +1329,10 @@
   });
   $("#tunePlay").addEventListener("click", () => {
     let last = -1;
-    play(tuneEvents(), 0.3, pos => {
-      const col = Math.floor(pos); if (col === last) return; last = col;
+    play(tuneEvents(), 0.3, (k, ev) => {
+      if (ev.col === last) return; last = ev.col;
       $$(".tune8 button.now").forEach(b => b.classList.remove("now"));
-      $$(`.tune8 button[data-col="${col}"]`).forEach(b => b.classList.add("now"));
+      $$(`.tune8 button[data-col="${ev.col}"]`).forEach(b => b.classList.add("now"));
     });
   });
   $("#tuneBuild").addEventListener("click", () => {
@@ -1178,9 +1344,10 @@
 
   // ---------- Boot ----------
   showIdea(1, false);
+  renderStickers();
   updateCount();
   renderParts();
-  renderSongs(); renderBuilder(true);
+  renderSongs(); renderBuilder();
   $("#startOut").textContent = music.start; $("#spaceOut").textContent = music.space;
   renderTune();
   const h = (location.hash || "").slice(1);
