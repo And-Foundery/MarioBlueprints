@@ -3,6 +3,23 @@
 > An idea machine that helps kids dream up fun Super Mario Maker 2 levels.
 > Spin → get a level idea → learn the trick → go build it.
 
+## Decisions (round 2)
+
+| Topic | Decision |
+|---|---|
+| Ages | 7–10 |
+| Language | English |
+| Who can use it | Our family only. Private, no public sign-ups |
+| Icons | No emojis. We draw our own SVG icons (no Nintendo sprites) |
+| Creativity | The site gives **sparks, not plans**. Kids pick how much help they want (Tiny spark, Spark, Big spark). Everything else is labeled "You choose!", and instead of steps they get open questions like "Where does the big surprise go?" |
+| Music | A whole section on Music Blocks: how they work, a song helper with a block-by-block map, and a tune maker kids can play and hear |
+| Accounts / database | Not needed. Saved ideas stay on the device. **No Supabase** for now |
+| Hosting | **Vercel** (free Hobby plan), protected with a family password. GitHub Pages would need a public repo on the free plan, so the site would be public |
+
+Clickable mockup: `mockup/index.html`
+
+> Everything below is round 1. Where it disagrees with the table above, the table wins.
+
 ---
 
 ## 1. Who it's for
