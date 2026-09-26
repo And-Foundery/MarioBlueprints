@@ -4,7 +4,185 @@ Status: **design only, nothing built yet.** Waiting for approval.
 
 ---
 
-## Round 4 updates (these win over anything below)
+## Round 5 updates (these win over everything below)
+
+### A. What a full idea card looks like
+Every spin gives a **complete level idea**. Each card has these parts, always in this order:
+
+| Part of the card | What it says |
+|---|---|
+| **Funny name** | A Dog Man-style title, which they can keep or change (see section C) |
+| **The big idea** | 1–2 sentences a 7-year-old can picture |
+| **Set it up** | Game style + course theme (+ day or night), each with the reason why |
+| **Star parts** | The 4–6 parts that make it work (tap one to open the Parts Book) |
+| **Build it in 3 parts** | Start (learn it safely) → Middle (make it harder) → Big finish |
+| **Goal** | Just the flag, or an optional clear condition |
+| **Secret (bonus)** | One small surprise to hide |
+| **Kid check** | How hard it is (1–3 stars) and about how long it takes to build |
+
+### B. Every idea must pass the "Kid check"
+An idea goes into the wheel only if **all** of these are true:
+1. It uses **6 or fewer kinds of parts**, and all of them are in the chosen game style.
+2. It needs **no pro tricks** (no shell jumps, frame-perfect jumps or glitches) and **no troll traps**.
+3. It fits in the **main area plus at most one sub-area**.
+4. A kid can **test-clear it** themselves. That's the game's own rule before you can upload.
+5. It takes **under an hour** to build.
+6. Every fact on the card has been checked against a source. If one hasn't, the idea stays off the wheel.
+
+### C. Funny names, Dog Man style
+The Dog Man books are funny because they twist famous titles: *Lord of the Fleas*, *A Tale of Two Kitties*, *For Whom the Ball Rolls*, *Grime and Punishment*, *Twenty Thousand Fleas Under the Sea*, *Fetch-22*, *Mothering Heights*, *The Scarlet Shedder*, *Brawl of the Wild*.
+
+We do the same with Mario words:
+- **Every card comes with a funny name.**
+- A **Funny name** button gives a new one any time the kids are out of juice.
+- The name matches the idea. A spring level gets a spring joke.
+- Kids can always type their own name instead.
+
+| Famous title | Mario Maker joke name |
+|---|---|
+| Lord of the Rings | **Lord of the Springs** |
+| A Tale of Two Cities | **A Tale of Two Pipes** |
+| Twenty Thousand Leagues Under the Sea | **Twenty Thousand Cheeps Under the Sea** |
+| For Whom the Bell Tolls | **For Whom the Shell Rolls** |
+| Crime and Punishment | **Switch and Punishment** |
+| Toy Story | **Toad Story** |
+| Finding Nemo | **Finding Cheep-O** |
+| Charlie and the Chocolate Factory | **Charlie and the Coin Factory** |
+| Diary of a Wimpy Kid | **Diary of a Wimpy Goomba** |
+| Where the Wild Things Are | **Where the Wild Koopas Are** |
+| Green Eggs and Ham | **Green Eggs and Yoshi** |
+| The Very Hungry Caterpillar | **The Very Hungry Piranha Plant** |
+| Goodnight Moon | **Goodnight Goomba** |
+| How to Train Your Dragon | **How to Train Your Dry Bones** |
+| Around the World in 80 Days | **Around the World in 80 Pipes** |
+| Mission: Impossible | **Mushroom: Impossible** |
+| The Empire Strikes Back | **The Goomba Strikes Back** |
+| If You Give a Mouse a Cookie | **If You Give a Goomba a Mushroom** |
+| Night at the Museum | **Night at the Boo-seum** |
+| The Lion, the Witch and the Wardrobe | **The Lava, the Witch and the Warp Pipe** |
+| Die Hard (a grown-up joke) | **Pipe Hard** |
+| Whodunit | **Boo-dunit** |
+
+We'll write about 100 of these.
+
+### D. Only one button: SPIN AGAIN
+The card has **Spin again**, **Save** and **Read it to me**. There's no Mix it up and no tappable words.
+
+### E. Themes from the online community (real-world places removed)
+The real-places list is gone. The wheel wedges now match the **official Course World tags** that players use to find levels: Standard, Puzzle-solving, Speedrun, Autoscroll, Auto-Mario, Short and sweet, Multiplayer Versus, Themed, Music, Art, Technical, Shooter, Boss battle, Single player and Link. We leave out Technical because it needs pro skills.
+
+**The 6 wedges**
+
+| Wedge | Community tag it comes from |
+|---|---|
+| **Adventure** | Standard |
+| **Puzzle** | Puzzle-solving |
+| **Speedrun** | Speedrun, Short and sweet |
+| **Ride Along** | Autoscroll, Auto-Mario |
+| **Boss Battle** | Boss battle, Shooter |
+| **Music** | Music |
+
+**Community-favorite themes, used as the "flavor" inside ideas**
+- **Remakes of real Mario worlds:** World 1-1 (the most remade level), SMB3's Desert Land with the Angry Sun, SMW's Donut Plains, NSMBU's Acorn Plains, Rainbow Road
+- **Other games in Mario Maker style:**
+  - A Zelda-style dungeon with the Master Sword power-up (the "Link" tag, SMB style only)
+  - A Kirby-style world
+  - A Pokémon-style adventure
+  - A Castlevania-style castle climb
+  - A space shooter in a Koopa Clown Car (the "Shooter" tag)
+- **Minigames:** table tennis and soccer with shells (popular in Course World)
+- **Short and sweet:** a one-screen puzzle or a 30-second dash
+- **Multiplayer Versus:** a race for 2–4 players
+- **Pixel art:** build a picture with blocks (the "Art" tag)
+
+**Music themes (famous songs the community turns into music levels)**
+
+Popular music levels recreate songs from games (Mario, Zelda, Kirby, Splatoon, Undertale's *Megalovania*), TV and movies (like **The Office** theme you mentioned), plus classical songs.
+- **Build-Along songs (note by note):** we ship songs we're allowed to write out:
+  - The **Tetris** melody (an old Russian folk song called *Korobeiniki*)
+  - *Für Elise*
+  - *In the Hall of the Mountain King*
+  - The *Can-Can*
+  - *The Entertainer*
+  - *William Tell* (the galloping part)
+  - *Ode to Joy*
+  - Twinkle Twinkle
+  - Happy Birthday
+  - Jingle Bells
+- **Famous TV, movie and game songs** (The Office, Megalovania, Zelda and others) are still modern songs owned by someone, so we won't write them out note by note. They appear as **music level ideas**, and the kids pick the tune out by ear in the **Tune Maker**, which plays every note as they tap. That's how many community makers learn songs anyway.
+
+### F. Space check: confirmed
+**Night Sky has low gravity.** Jumps go much higher and floatier, and Goombas float too. Night is available in every style **except 3D World**. So the "space" idea is real: *Sky theme + Night + any style except 3D World*.
+
+Other confirmed night effects we can use in ideas:
+- **Night Underwater:** the water becomes poison, like lava.
+- **Dark night levels:** you can only see a small circle of light around the player.
+
+### G. Five full example cards (all pass the Kid check)
+
+---
+**1. Twenty Thousand Cheeps Under the Sea** · Adventure · 1 star · about 40 min
+- **Big idea:** Dive into a sunken pirate ship, find the captain's key and open the treasure room.
+- **Set it up:** Super Mario World style, Underwater theme, Day. Day water is safe to swim in.
+- **Star parts:** Cheep Cheep, Blooper, Key, Locked Door, Coins, Checkpoint Flag.
+- **Build it in 3 parts:**
+  - **Start:** A beach, then dive in. Use slow Cheep Cheeps so players learn to swim.
+  - **Middle:** A pipe leads into the ship (sub-area). Bloopers guard the hallways, and the key is in the captain's room.
+  - **Big finish:** Swim back and unlock the treasure room. It's full of coins, and the flag is inside.
+- **Goal:** Reach the flag. For extra challenge, add a "collect 50 coins" clear condition.
+- **Secret:** A hidden 1-Up in the crow's nest.
+
+---
+**2. Switch and Punishment** · Puzzle · 2 stars · about 45 min
+- **Big idea:** A castle where one ON/OFF switch flips red and blue blocks. Flip it at the right time to climb the tower.
+- **Set it up:** Super Mario Bros. 3 style, Castle theme.
+- **Star parts:** ON/OFF Switch, red and blue ON/OFF blocks, Fire Bar, Door, Checkpoint Flag, Boom Boom.
+- **Build it in 3 parts:**
+  - **Start:** One switch and one red wall. Hit the switch to open it.
+  - **Middle:** Stairs that appear and disappear. Flip the switch to make the next step solid.
+  - **Big finish:** A door to Boom Boom's room. Beat him to reach the flag.
+- **Goal:** Beat the boss, then reach the flag.
+- **Secret:** A blue block path hides a Super Mushroom.
+
+---
+**3. Goodnight Goomba** (a space adventure) · Adventure · 2 stars · about 40 min
+- **Big idea:** Mario is on the moon! Floaty low-gravity jumps across cloud islands while Goombas float around.
+- **Set it up:** New Super Mario Bros. U style, **Sky theme, Night** (low gravity).
+- **Star parts:** Cloud Blocks, Lifts, Goombas, Coins, Super Star, Checkpoint Flag.
+- **Build it in 3 parts:**
+  - **Start:** Short, safe floaty jumps over solid ground, so players feel the low gravity.
+  - **Middle:** Big jumps between cloud islands, with a Super Star run through a crowd of floating Goombas.
+  - **Big finish:** A tall climb up to the flag at the top of the sky.
+- **Goal:** Reach the flag.
+- **Secret:** A coin shape of a rocket, high above the start.
+
+---
+**4. For Whom the Shell Rolls** · Speedrun · 2 stars · about 30 min
+- **Big idea:** Kick a shell down a hill and chase it! It knocks out every enemy in your way. Keep up before the timer runs out.
+- **Set it up:** Super Mario World style, Ground theme, short timer (100 seconds).
+- **Star parts:** Koopa Troopa, Slopes, Goombas, Bricks, Coins, Trampoline.
+- **Build it in 3 parts:**
+  - **Start:** Grab the Koopa's shell and kick it down the first hill.
+  - **Middle:** Rows of Goombas and bricks that the shell smashes for you.
+  - **Big finish:** A trampoline launch to the flag.
+- **Goal:** Reach the flag in time.
+- **Secret:** A pipe shortcut near the start.
+
+---
+**5. Block Party** (Tetris song) · Music · 1 star · about 45 min
+- **Big idea:** Don't touch anything! The screen moves by itself while Music Blocks play the Tetris song.
+- **Set it up:** Super Mario Bros. style, Ground theme, **auto-scroll: slow**.
+- **Star parts:** Note Blocks, Goombas (piano sound), ground, Arrow Sign.
+- **Build it in 3 parts:**
+  - **Start:** An arrow sign and a flat floor. Tell the player to relax.
+  - **Middle:** The song, built block by block with the **Build-Along** in the Music tab.
+  - **Big finish:** A last big note, then the flag.
+- **Goal:** Reach the flag.
+- **Secret:** Hide a second song in a sub-area.
+
+---
+
+## Round 4 updates (sections A and B are now replaced by Round 5)
 
 ### A. Six bigger wedges
 Music leaves the wheel because it has its own tab. Race joins Ride. There's a new **Famous Places** wedge.
