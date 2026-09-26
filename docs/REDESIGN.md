@@ -2,6 +2,93 @@
 
 Status: **design only, nothing built yet.** Waiting for approval.
 
+---
+
+## Round 4 updates (these win over anything below)
+
+### A. Six bigger wedges
+Music leaves the wheel because it has its own tab. Race joins Ride. There's a new **Famous Places** wedge.
+
+| # | Wedge | One-line meaning |
+|---|---|---|
+| 1 | **Famous Places** | Build a real place, or remake a famous Mario world |
+| 2 | **Escape!** | Something is chasing you, so get out fast |
+| 3 | **Puzzle** | Figure out how to get through |
+| 4 | **Ride & Race** | Ride something the whole way, or beat the clock |
+| 5 | **Treasure Hunt** | Find the hidden stuff |
+| 6 | **Boss Battle** | A big fight at the end |
+
+### B. Name it!
+The kids love naming levels, so every idea card gets a **Name it!** area:
+
+```
+  Name it!  [ The Spooky Pizza Palace______ ]   (they type their own)
+
+  Need help? Tap 3 tiles to build a name:
+  [Spooky] [Giant] [Sneaky]   [Pizza] [Boo] [Rocket]   [Palace] [Dash] [Mayhem]
+  [New tiles]
+```
+
+- Typing their own name comes first. The tiles are only there if they're stuck.
+- The tiles match the idea. A Boo Race idea gets tiles like "Boo", "Haunted" and "Chase".
+- They pick one tile from each row, so they still build the name themselves.
+- The name is saved with the idea in My Ideas.
+
+### C. Spin again vs. Mix it up (merged, so there's only one button)
+They were confusing, so we keep **one big SPIN** and make the card's key words tappable:
+
+> **Boo Race**: Race a line of <u>Boos</u> through a <u>haunted house</u>. Hit ON/OFF switches to open the path!
+
+- **SPIN** gives a brand-new idea.
+- **Tap a yellow word** to swap only that word. <u>Boos</u> can become <u>rising lava</u> or <u>Bullet Bills</u>, and <u>haunted house</u> can become <u>castle</u> or <u>volcano</u>. The rest of the idea stays the same.
+
+Kids get to steer the idea themselves, which keeps it creative, and there's no second button to explain.
+
+### D. Theme ideas
+
+**1. Real places**
+
+Kids love building places they know. Each one comes as a full idea card:
+
+| Place | The idea (what goes on the card) | Parts that fit |
+|---|---|---|
+| **The Office** | Get to the top floor of an office tower before work starts. Take the elevator, dodge the "boss" (a Thwomp) and grab coffee coins | Lifts on tracks, Doors, Thwomp, Coins, Semisolid Platforms as desks |
+| School Day | Run from class to class before the bell. Lunchroom, gym full of springs, library maze | Doors, Trampolines, Key for the principal's office |
+| Hospital | Deliver the medicine (a carried Super Mushroom) to every room | Doors, Super Mushroom, Lifts |
+| Airport | Check in, go through security (P-Switch gates) and catch your plane: an airship at the end! | P Switch, Conveyor Belt as the bag belt, Airship sub-area |
+| Supermarket | Shop for 5 items (keys) hidden on tall shelves | Key, Semisolid Platforms as shelves, Conveyor Belt at the checkout |
+| Pizza Shop | Make a pizza: collect toppings (coins) and deliver it hot before the timer ends | Coins, short timer, Koopa Shell as the pizza |
+| Zoo | Visit every animal cage: Goombas, Koopas, Bloopers in the aquarium | Enemies in rooms, Doors, Pipes |
+| Theme Park | Ride the rollercoaster (tracks), the ferris wheel (lifts) and the bumper cars | Track, Lift, Bumper |
+| Toy Factory | Toys ride the conveyor belts. Stop the factory before it floods with Bob-ombs | Conveyor Belt, Bob-omb, ON/OFF Switch |
+| Bakery | A giant cake level: frosting slopes, sprinkle coins, a candle-lit Fire Bar | Slopes, Coins, Fire Bar |
+| Library | A maze of bookshelves with a secret door behind one book | Hidden Block, Doors, Semisolid Platforms |
+| Space Station | Low-gravity night sky level with rockets (Bullet Bills) | Night Sky theme, Bill Blaster |
+| Soccer / Table Tennis | Kick a shell into the goal. Sports levels are a community favorite | Koopa Shell, Note Blocks, Bumpers |
+
+**2. Famous Mario worlds to remake**
+
+The kids can remake a world they know, in their own way:
+
+| Game | Worlds kids can remake |
+|---|---|
+| Super Mario Bros. | World 1-1 (the most remade level ever), Bowser's Castle, the underwater levels |
+| Super Mario Bros. 3 | Grass Land, Desert Land (with the Angry Sun), Giant Land, Sky Land, Ice Land, Pipe Land, Dark Land airships |
+| Super Mario World | Yoshi's Island, Donut Plains, Vanilla Dome, Forest of Illusion, Chocolate Island, Valley of Bowser, Star Road |
+| New Super Mario Bros. U | Acorn Plains, Layer-Cake Desert, Sparkling Waters, Frosted Glacier, Soda Jungle, Rock-Candy Mines, Meringue Clouds |
+| Super Mario 3D World | Super Bell Hill, Koopa Troopa Cave |
+| Other Mario games (for ideas) | Rainbow Road from Mario Kart, New Donk City from Mario Odyssey (a big city with office towers), a haunted hotel like Luigi's Mansion |
+
+**3. Story and feeling themes**
+
+Pirate treasure island, candy land, dinosaur jungle, ninja castle, rainy day, birthday party, the floor is lava, a snow day, a detective mystery, a volcano lab, an underwater city, a haunted hotel.
+
+That makes **about 50 theme ideas**. Combined with the tappable words and the name tiles, the wheel still produces thousands of whole ideas.
+
+---
+
+> Rounds 3 and earlier follow. Where they differ from Round 4, Round 4 wins.
+
 ## What we heard
 
 | Feedback | What changes |
