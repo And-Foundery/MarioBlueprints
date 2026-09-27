@@ -390,6 +390,27 @@
   .checks label:has(input:checked) { background: #E3F6EA; }
   .tipline { display: flex; gap: 10px; align-items: center; background: var(--sun-soft); border: 2px solid var(--ink); border-radius: 14px; padding: 10px 12px; font-weight: 800; }
   .tipline svg.ic { width: 34px; height: 34px; }
+
+  .stepbar { display: flex; gap: 8px; flex-wrap: wrap; }
+  .stepbar .sb { border: 3px solid var(--ink); border-radius: 999px; padding: 4px 14px; font-weight: 900; background: #fff; }
+  .stepbar .sb.on { background: var(--sun); }
+  .tut { display: grid; grid-template-columns: minmax(220px, 1fr) 1fr; gap: 18px; align-items: center; border: 3px solid var(--ink); border-radius: 22px; background: var(--sky); padding: 16px; }
+  @media (max-width: 700px) { .tut { grid-template-columns: 1fr; } }
+  .tut .pic { background: #fff; border: 3px solid var(--ink); border-radius: 16px; line-height: 0; }
+  .tut .pic svg { width: 100%; height: auto; }
+  .tut .say { display: flex; flex-direction: column; gap: 14px; }
+  .tut .say .big { font-family: "Lilita One", sans-serif; font-size: clamp(24px, 4vw, 32px); line-height: 1.15; }
+  .dots { display: flex; gap: 8px; }
+  .dots i { width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--ink); background: #fff; }
+  .dots i.on { background: var(--sun); }
+  .copysteps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 700px) { .copysteps { grid-template-columns: 1fr; } }
+  .cstep { border: 3px solid var(--ink); border-radius: 18px; background: var(--sky); padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .cstep .cpic { background: #fff; border-radius: 12px; border: 2px solid var(--ink); line-height: 0; }
+  .cstep .cpic svg { width: 100%; height: auto; }
+  .cstep p { margin: 0; font-size: 18px; font-weight: 800; }
+  .instr { display: flex; gap: 12px; flex-wrap: wrap; }
+  .instr .move { flex: 1 1 200px; }
 </style>
 
 <!-- Icon set: drawn for this project, no game sprites -->
@@ -532,84 +553,49 @@
     <!-- MUSIC -->
     <section class="stack" data-panel="music" hidden>
       <div class="panel stack">
+        <div class="stepbar" aria-label="Three steps">
+          <span class="sb on">1 Build one</span><span class="sb">2 Copy it</span><span class="sb">3 Make a song</span>
+        </div>
         <div>
-          <h2>How Music Blocks work</h2>
-          <p class="lead">Four steps. Every note in a song is built the same way.</p>
+          <h2>Step 1: Build one Singing Stack</h2>
+          <p class="lead">A Singing Stack plays one note. Every song is just lots of these!</p>
         </div>
-        <div class="howto4">
-          <div class="mstep">
-            <span class="num">1</span>
-            <svg class="diag" viewBox="0 0 200 96" aria-hidden="true" style="stroke:#13203F;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round">
-              <use href="#i-noteblock" x="18" y="22" width="52" height="52"/>
-              <path d="M82 48h34M106 38l12 10-12 10" fill="none" stroke-width="4"/>
-              <rect x="132" y="24" width="50" height="50" rx="8" fill="#FF8A3D"/><use href="#i-note" x="140" y="32" width="34" height="34"/>
-            </svg>
-            <p><b>Make a Music Block.</b> Press and hold the Note Block, then pick the <b>Music Block</b>.</p>
-          </div>
-          <div class="mstep">
-            <span class="num">2</span>
-            <svg class="diag" viewBox="0 0 200 96" aria-hidden="true" style="stroke:#13203F;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round">
-              <use href="#i-cloudblock" x="76" y="2" width="48" height="48"/>
-              <use href="#i-goomba" x="84" y="8" width="32" height="32"/>
-              <rect x="78" y="48" width="44" height="44" rx="7" fill="#FF8A3D"/><use href="#i-note" x="86" y="56" width="28" height="28"/>
-              <path d="M140 12v40M134 44l6 8 6-8" fill="none" stroke="#E5483B" stroke-width="3"/>
-            </svg>
-            <p><b>Add a Cloud Block on top</b>, and put a <b>Goomba inside the cloud</b>. It drops, plays one note, and stays on the cloud.</p>
-          </div>
-          <div class="mstep">
-            <span class="num">3</span>
-            <svg class="diag" viewBox="0 0 200 96" aria-hidden="true" style="stroke:#13203F;stroke-width:2.4">
-              <g><rect x="30" y="70" width="22" height="22" rx="4" fill="#E5483B"/><rect x="70" y="56" width="22" height="22" rx="4" fill="#FF8A3D"/><rect x="110" y="42" width="22" height="22" rx="4" fill="#FFC93C"/><rect x="150" y="28" width="22" height="22" rx="4" fill="#22A45D"/></g>
-              <path d="M40 60 L160 18" fill="none" stroke-dasharray="4 5"/><path d="M152 16l9 1-5 8" fill="none"/>
-            </svg>
-            <p><b>Higher block = higher note.</b> Each square up is one step higher.</p>
-          </div>
-          <div class="mstep">
-            <span class="num">4</span>
-            <svg class="diag" viewBox="0 0 200 96" aria-hidden="true" style="stroke:#13203F;stroke-width:2.4">
-              <g fill="#FF8A3D"><rect x="20" y="50" width="16" height="16" rx="3"/><rect x="52" y="38" width="16" height="16" rx="3"/><rect x="84" y="50" width="16" height="16" rx="3"/><rect x="116" y="30" width="16" height="16" rx="3"/><rect x="148" y="42" width="16" height="16" rx="3"/><rect x="180" y="50" width="16" height="16" rx="3"/></g>
-              <rect x="44" y="10" width="92" height="74" rx="6" fill="none" stroke="#E5483B" stroke-width="3.4" stroke-dasharray="8 5"/>
-              <path d="M142 22h26M160 15l8 7-8 7" fill="none" stroke="#E5483B" stroke-width="3.4"/>
-            </svg>
-            <p><b>Turn on auto-scroll.</b> Each Goomba drops when the screen reaches it, so the song plays as you move.</p>
-          </div>
+        <div id="tut" class="tut"></div>
+      </div>
+
+      <div class="panel stack">
+        <div>
+          <h2>Step 2: Copy it to make lots, fast</h2>
+          <p class="lead">Don't build every stack by hand. Copy the one you made!</p>
         </div>
-        <div class="tipline"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-star"/></svg><span><b>Try one note first!</b> Build just one Music Block + Cloud + Goomba, then press play. When you hear it, you're ready for a whole song.</span></div>
+        <div class="copysteps">
+          <div class="cstep"><div class="cpic"><svg viewBox="0 0 200 110" aria-hidden="true"><rect x="0" y="96" width="200" height="14" fill="#C87B3E"/><rect x="0" y="96" width="200" height="4" fill="#4DB654"/><g transform="translate(80 14)"><use href="#i-cloudblock" x="0" y="0" width="40" height="40" style="stroke:#13203F;stroke-width:2"/><use href="#i-goomba" x="9" y="6" width="22" height="22" style="stroke:#13203F;stroke-width:2"/><rect x="2" y="40" width="36" height="36" rx="6" fill="#FF8A3D" stroke="#13203F" stroke-width="2.5"/><use href="#i-note" x="8" y="46" width="24" height="24" style="stroke:#13203F;stroke-width:2"/></g><g transform="translate(140 10)"><rect width="46" height="30" rx="8" fill="#FFC93C" stroke="#13203F" stroke-width="2.5"/><path d="M10 9h26v12H10z" fill="none" stroke="#13203F" stroke-width="2" stroke-dasharray="4 3"/></g></svg></div><p><b>1.</b> Tap the <b>Multi-Grab</b> button.</p></div>
+          <div class="cstep"><div class="cpic"><svg viewBox="0 0 200 110" aria-hidden="true"><rect x="0" y="96" width="200" height="14" fill="#C87B3E"/><rect x="0" y="96" width="200" height="4" fill="#4DB654"/><g transform="translate(80 14)"><use href="#i-cloudblock" x="0" y="0" width="40" height="40" style="stroke:#13203F;stroke-width:2"/><use href="#i-goomba" x="9" y="6" width="22" height="22" style="stroke:#13203F;stroke-width:2"/><rect x="2" y="40" width="36" height="36" rx="6" fill="#FF8A3D" stroke="#13203F" stroke-width="2.5"/><use href="#i-note" x="8" y="46" width="24" height="24" style="stroke:#13203F;stroke-width:2"/><rect x="-8" y="-8" width="56" height="92" rx="6" fill="none" stroke="#E5483B" stroke-width="3" stroke-dasharray="6 4"/></g></svg></div><p><b>2.</b> Tap it <b>again</b> to switch to <b>Copy</b>. Drag a box around your stack.</p></div>
+          <div class="cstep"><div class="cpic"><svg viewBox="0 0 200 110" aria-hidden="true"><rect x="0" y="96" width="200" height="14" fill="#C87B3E"/><rect x="0" y="96" width="200" height="4" fill="#4DB654"/><g transform="translate(14 14)"><use href="#i-cloudblock" x="0" y="0" width="40" height="40" style="stroke:#13203F;stroke-width:2"/><use href="#i-goomba" x="9" y="6" width="22" height="22" style="stroke:#13203F;stroke-width:2"/><rect x="2" y="40" width="36" height="36" rx="6" fill="#FF8A3D" stroke="#13203F" stroke-width="2.5"/><use href="#i-note" x="8" y="46" width="24" height="24" style="stroke:#13203F;stroke-width:2"/></g><g transform="translate(80 4)"><use href="#i-cloudblock" x="0" y="0" width="40" height="40" style="stroke:#13203F;stroke-width:2"/><use href="#i-goomba" x="9" y="6" width="22" height="22" style="stroke:#13203F;stroke-width:2"/><rect x="2" y="40" width="36" height="36" rx="6" fill="#FF8A3D" stroke="#13203F" stroke-width="2.5"/><use href="#i-note" x="8" y="46" width="24" height="24" style="stroke:#13203F;stroke-width:2"/></g><g transform="translate(146 24)"><use href="#i-cloudblock" x="0" y="0" width="40" height="40" style="stroke:#13203F;stroke-width:2"/><use href="#i-goomba" x="9" y="6" width="22" height="22" style="stroke:#13203F;stroke-width:2"/><rect x="2" y="40" width="36" height="36" rx="6" fill="#FF8A3D" stroke="#13203F" stroke-width="2.5"/><use href="#i-note" x="8" y="46" width="24" height="24" style="stroke:#13203F;stroke-width:2"/></g></svg></div><p><b>3.</b> Tap where you want each copy. Easy!</p></div>
+        </div>
       </div>
 
       <div class="panel stack" id="buildPanel">
         <div>
-          <h2>Build a song, like pixel art</h2>
-          <p class="lead">Pick a song. Then copy the picture into your level, square by square. Each colored square is one Music Block.</p>
+          <h2>Step 3: Make a song</h2>
+          <p class="lead">Pick a song. Then put your stacks where the picture shows, one at a time.</p>
         </div>
         <div>
-          <h3 style="font-size:22px;margin-bottom:8px">1. Pick a song</h3>
+          <h3 style="font-size:22px;margin-bottom:8px">Pick a song</h3>
           <div id="songGrid" class="songlib" role="group" aria-label="Songs"></div>
         </div>
-        <div>
-          <h3 style="font-size:22px;margin-bottom:8px">2. Copy the picture</h3>
-          <div id="builder" class="builder"></div>
-        </div>
-        <div>
-          <h3 style="font-size:22px;margin-bottom:8px">3. Finish and test</h3>
-          <ul class="checks">
-            <li><label><input type="checkbox" id="ck1"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-noteblock"/></svg>Every block is a <b>&nbsp;Music Block&nbsp;</b> (hold the Note Block to switch it).</label></li>
-            <li><label><input type="checkbox" id="ck2"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-cloudblock"/></svg>Every Music Block has a Cloud Block on top, with a Goomba inside the cloud.</label></li>
-            <li><label><input type="checkbox" id="ck3"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-arrow-r"/></svg>Auto-scroll is on (start with Slow).</label></li>
-            <li><label><input type="checkbox" id="ck4"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-player"/></svg>Mario walks along the ground below. Don't jump into the blocks!</label></li>
-          </ul>
-          <div class="tipline" style="margin-top:10px"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-question"/></svg><span><b>Not working?</b> No sound: check it's a Music Block, not a Note Block. Extra notes: the Goomba walked off the cloud, so put a block on each side of it like a little cage. Too fast: leave more squares between the blocks.</span></div>
-        </div>
+        <div id="builder" class="builder"></div>
+        <div class="tipline"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-question"/></svg><span><b>Not working?</b> No sound: hold the Note Block and pick Music Block. Extra notes: put a block on each side of the Goomba. Too fast: leave more squares between stacks.</span></div>
         <details class="grown">
           <summary>Grown-ups: settings</summary>
           <div class="settings">
-            <label>Lowest note: squares above the ground
+            <label>First stack: squares above the ground
               <span class="stepper"><button type="button" data-step="start" data-d="-1" aria-label="Lower">−</button><output id="startOut">3</output><button type="button" data-step="start" data-d="1" aria-label="Higher">+</button></span>
             </label>
             <label>Squares per beat
               <span class="stepper"><button type="button" data-step="space" data-d="-1" aria-label="Fewer">−</button><output id="spaceOut">2</output><button type="button" data-step="space" data-d="1" aria-label="More">+</button></span>
             </label>
-            <label for="soundSel">Sound (what you drag onto the Note Block)
+            <label for="soundSel">Sound (what sits in the cloud)
               <select id="soundSel">
                 <option value="piano">Goomba (piano)</option>
                 <option value="beep">Super Mushroom (8-bit beep)</option>
@@ -618,7 +604,6 @@
               </select>
             </label>
           </div>
-          <p class="note">In the game, songs are played by moving the screen at a steady speed. Change the squares per beat if the song sounds too fast or too slow.</p>
         </details>
       </div>
 
@@ -1261,8 +1246,8 @@
   // All songs here are old enough to be free for anyone to use (public domain).
   // n = [notes up from C, length in eighth notes]
   const SONG_GROUPS = [
+    { id: "easy", name: "Start here: easy songs", icon: "star" },
     { id: "mario", name: "Mario-style (our own tunes)", icon: "mushroom" },
-    { id: "easy", name: "Easy starters", icon: "star" },
     { id: "party", name: "Party and holiday", icon: "gift" },
     { id: "classic", name: "Famous classics", icon: "crown" },
     { id: "spooky", name: "Spooky and dramatic", icon: "ghost" },
@@ -1276,6 +1261,8 @@
     march: { g: "mario", name: "Lava Castle March (castle)", n: [[0,2],[0,1],[3,1],[2,2],[0,2],[-1,2],[0,1],[-1,1],[-4,4],[0,2],[0,1],[3,1],[7,2],[6,2],[5,2],[3,1],[2,1],[0,4]] },
     dash: { g: "mario", name: "Star Power Dash (super fast)", n: [[12,1],[12,1],[12,1],[7,1],[9,1],[12,1],[14,2],[12,1],[12,1],[12,1],[7,1],[9,1],[12,1],[16,2],[14,1],[12,1],[9,1],[7,1],[9,1],[12,1],[14,2],[12,4]] },
     victory: { g: "mario", name: "Flagpole Fanfare (level clear)", n: [[0,1],[4,1],[7,1],[11,1],[12,3],[11,1],[12,6]] },
+    first: { g: "easy", name: "My First Song (3 notes)", n: [[0,2],[2,2],[4,4]] },
+    stairs: { g: "easy", name: "Up the Stairs (5 notes)", n: [[0,2],[2,2],[4,2],[5,2],[7,4]] },
     buns: { g: "easy", name: "Hot Cross Buns", n: [[4,2],[2,2],[0,4],[4,2],[2,2],[0,4],[0,1],[0,1],[0,1],[0,1],[2,1],[2,1],[2,1],[2,1],[4,2],[2,2],[0,4]] },
     mary: { g: "easy", name: "Mary Had a Little Lamb", n: [[4,2],[2,2],[0,2],[2,2],[4,2],[4,2],[4,4],[2,2],[2,2],[2,4],[4,2],[7,2],[7,4]] },
     twinkle: { g: "easy", name: "Twinkle Twinkle", n: [[0,2],[0,2],[7,2],[7,2],[9,2],[9,2],[7,4],[5,2],[5,2],[4,2],[4,2],[2,2],[2,2],[0,4]] },
@@ -1298,7 +1285,7 @@
     toccata: { g: "spooky", name: "Spooky Organ (Toccata)", n: [[9,1],[7,1],[9,6],[7,1],[5,1],[4,1],[2,1],[1,3],[2,6]] },
     tetris: { g: "game", name: "Tetris song", n: [[4,2],[-1,1],[0,1],[2,2],[0,1],[-1,1],[-3,2],[-3,1],[0,1],[4,2],[2,1],[0,1],[-1,3],[0,1],[2,2],[4,2],[0,2],[-3,2],[-3,4]] }
   };
-  const music = { song: "sunny", sound: "piano", start: 3, space: 2, part: 0, done: {}, custom: null };
+  const music = { song: "first", sound: "piano", start: 3, space: 2, step: 0, custom: null };
 
   function events() {
     if (music.song === "custom") return music.custom || [];
@@ -1314,83 +1301,139 @@
       return `<div class="songgroup"><h4>${ic(gr.icon)}${esc(gr.name)}</h4><div class="songgrid">${list.map(([k, sg]) => btn(k, sg)).join("")}</div></div>`;
     }).join("") + (music.custom ? `<div class="songgroup"><h4>${ic("pencil")}My tunes</h4><div class="songgrid"><button class="songbtn" data-song="custom" aria-pressed="${music.song === "custom"}">${ic("pencil")}<span>My tune<small>${music.custom.length} blocks</small></span></button></div></div>` : "");
   }
-  function selectSong(k) { stopAll(); music.song = k; music.part = 0; renderSongs(); renderBuilder(); }
+  function selectSong(k) { stopAll(); music.song = k; music.step = 0; renderSongs(); renderBuilder(); }
   $("#songGrid").addEventListener("click", e => { const b = e.target.closest("[data-song]"); if (b) { selectSong(b.dataset.song); play(events(), 0.2); } });
   $("#soundSel").addEventListener("change", e => { music.sound = e.target.value; hear(0); });
 
-  const PER = 8;
+  // ----- Step 1 tutorial: build one Singing Stack -----
+  const TUT = [
+    { say: "Put a Note Block in the air.", show: ["note"] },
+    { say: "Press and hold it. Pick the Music Block.", show: ["music"] },
+    { say: "Put a Cloud Block right on top.", show: ["music", "cloud"] },
+    { say: "Put a Goomba inside the cloud.", show: ["music", "cloud", "goomba"] },
+    { say: "Turn on auto-scroll and press play. You hear a note!", show: ["music", "cloud", "goomba", "sound"] }
+  ];
+  let tutStep = 0;
+  function tutPic(show) {
+    const has = k => show.includes(k);
+    let g = `<svg viewBox="0 0 240 200" role="img" aria-label="Building a Singing Stack">`;
+    for (let x = 0; x <= 240; x += 30) g += `<line x1="${x}" x2="${x}" y1="0" y2="170" stroke="#EDF2FB"/>`;
+    for (let y = 20; y <= 170; y += 30) g += `<line x1="0" x2="240" y1="${y}" y2="${y}" stroke="#EDF2FB"/>`;
+    g += `<rect y="170" width="240" height="30" fill="#C87B3E"/><rect y="170" width="240" height="6" fill="#4DB654"/>`;
+    g += `<use href="#i-player" x="12" y="136" width="34" height="34" style="stroke:#13203F;stroke-width:2.4"/>`;
+    if (has("note")) g += `<use href="#i-noteblock" x="105" y="80" width="30" height="30" style="stroke:#13203F;stroke-width:2.4"/>`;
+    if (has("music")) g += `<rect x="106" y="81" width="28" height="28" rx="5" fill="#FF8A3D" stroke="#13203F" stroke-width="2.5"/><use href="#i-note" x="110" y="85" width="20" height="20" style="stroke:#13203F;stroke-width:2"/>`;
+    if (has("cloud")) g += `<use href="#i-cloudblock" x="102" y="48" width="36" height="36" style="stroke:#13203F;stroke-width:2.2"/>`;
+    if (has("goomba")) g += `<use href="#i-goomba" x="110" y="52" width="20" height="20" style="stroke:#13203F;stroke-width:2"/>`;
+    if (has("sound")) g += `<path d="M146 76a14 14 0 0 1 0 20M154 68a26 26 0 0 1 0 36M94 76a14 14 0 0 0 0 20M86 68a26 26 0 0 0 0 36" fill="none" stroke="#E5483B" stroke-width="3.4" stroke-linecap="round"/>`;
+    return g + `</svg>`;
+  }
+  function renderTut() {
+    const t = TUT[tutStep], last = tutStep === TUT.length - 1;
+    $("#tut").innerHTML = `<div class="pic">${tutPic(t.show)}</div>
+      <div class="say">
+        <div class="dots">${TUT.map((_, k) => `<i class="${k <= tutStep ? "on" : ""}"></i>`).join("")}</div>
+        <div class="big">${esc(t.say)}</div>
+        <div class="row">
+          <button class="btn" id="tBack" ${tutStep === 0 ? "disabled" : ""}>Back</button>
+          <button class="btn ${last ? "go" : "spin"}" id="tNext" style="${last ? "" : "font-size:22px;min-height:58px"}">${last ? ic("star") + "I heard it!" : "Next"}</button>
+        </div>
+      </div>`;
+  }
+  $("#tut").addEventListener("click", e => {
+    if (e.target.closest("#tBack")) { tutStep = Math.max(0, tutStep - 1); renderTut(); return; }
+    const nx = e.target.closest("#tNext");
+    if (!nx) return;
+    if (tutStep < TUT.length - 1) { tutStep++; renderTut(); if (tutStep === TUT.length - 1) hear(0); }
+    else { burst(nx); cheer(); $$(".stepbar .sb").forEach((b, k) => b.classList.toggle("on", k <= 1)); }
+  });
+
+  // ----- Step 3: one stack at a time -----
   function renderBuilder() {
     const ev = events();
     const box = $("#builder");
     if (!ev.length) { box.innerHTML = `<p class="note">Tap some squares in the tune maker first.</p>`; return; }
-    const parts = Math.ceil(ev.length / PER);
-    music.part = Math.min(music.part, parts - 1);
+    const i = Math.min(music.step, ev.length);
+    const done = i >= ev.length;
     const min = Math.min(...ev.map(e => e.off)), max = Math.max(...ev.map(e => e.off));
     const rowOf = e => music.start + e.off - min;
     const X = e => e.col * music.space;
-    const i0 = music.part * PER, grp = ev.slice(i0, i0 + PER), prev = ev[i0 - 1];
-    const x0 = (prev ? X(prev) : X(grp[0])) - 2, x1 = X(grp[grp.length - 1]) + 2;
+    const cur = ev[Math.min(i, ev.length - 1)], prev = done ? null : ev[i - 1];
+    const lo = Math.max(0, (done ? ev.length - 1 : i) - 3), hi = Math.min(ev.length - 1, (done ? ev.length - 1 : i) + 1);
+    const win = ev.slice(lo, hi + 1);
+    const x0 = X(win[0]) - 2, x1 = X(win[win.length - 1]) + 2;
     const topRow = music.start + (max - min) + 2;
-    const W = 30, LW = 30, BOT = 26;
-    const cols = x1 - x0 + 1, width = LW + cols * W + 4, height = (topRow + 1) * W + BOT;
+    const W = 34, LW = 30;
+    const cols = x1 - x0 + 1, width = LW + cols * W + 4, height = (topRow + 1) * W + 24;
     const cx = x => LW + (x - x0) * W, cy = r => (topRow - r) * W;
-    let g = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Picture of where the Music Blocks go" font-family="Nunito, sans-serif">`;
+    let g = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Where the stacks go" font-family="Nunito, sans-serif">`;
     for (let r = 1; r <= topRow; r++) {
       g += `<rect x="${LW}" y="${cy(r)}" width="${cols * W}" height="${W}" fill="${r % 2 ? "#FFFFFF" : "#F5F8FE"}"/>`;
-      g += `<text x="${LW - 6}" y="${cy(r) + W / 2 + 5}" text-anchor="end" font-size="13" font-weight="900" fill="#4A5578">${r}</text>`;
+      g += `<text x="${LW - 6}" y="${cy(r) + W / 2 + 5}" text-anchor="end" font-size="13" font-weight="900" fill="#98A3BD">${r}</text>`;
     }
     for (let x = x0; x <= x1 + 1; x++) g += `<line x1="${cx(x)}" x2="${cx(x)}" y1="0" y2="${cy(0)}" stroke="#DCE5F5"/>`;
-    for (let r = 1; r <= topRow + 1; r++) g += `<line x1="${LW}" x2="${LW + cols * W}" y1="${cy(r) + W}" y2="${cy(r) + W}" stroke="#DCE5F5"/>`;
     g += `<rect x="${LW}" y="${cy(0)}" width="${cols * W}" height="${W}" fill="#C87B3E"/><rect x="${LW}" y="${cy(0)}" width="${cols * W}" height="6" fill="#4DB654"/>`;
-    g += `<text x="${LW - 6}" y="${cy(0) + W / 2 + 5}" text-anchor="end" font-size="11" font-weight="900" fill="#4A5578">0</text>`;
-    const first = X(ev[0]);
-    for (let x = x0; x <= x1; x++) { const n = x - first + 1; if (n >= 1) g += `<text x="${cx(x) + W / 2}" y="${height - 8}" text-anchor="middle" font-size="11" font-weight="800" fill="#98A3BD">${n}</text>`; }
-    if (!prev) g += `<use href="#i-player" x="${cx(x0)}" y="${cy(1)}" width="${W}" height="${W}" style="stroke:#13203F;stroke-width:2.4"/>`;
-    const drawBlk = (e, n, ghost) => {
-      const x = cx(X(e)), y = cy(rowOf(e));
-      const yc = cy(rowOf(e) + 1);
-      return `<g class="blk" data-n="${n}" opacity="${ghost ? 0.35 : 1}">
-        <use href="#i-cloudblock" x="${x}" y="${yc}" width="${W}" height="${W}" style="stroke:#13203F;stroke-width:2"/>
-        <use href="#i-goomba" x="${x + 6}" y="${yc + 4}" width="${W - 12}" height="${W - 12}" style="stroke:#13203F;stroke-width:2"/>
-        <rect x="${x + 2}" y="${y + 2}" width="${W - 4}" height="${W - 4}" rx="5" fill="${colorFor(e.off)}" stroke="#13203F" stroke-width="2.5"/>
-        <text x="${x + W / 2}" y="${y + W / 2 + 5}" text-anchor="middle" font-size="14" font-weight="900" fill="#13203F">${n}</text></g>`;
+    const stackAt = (e, n, mode) => {
+      const x = cx(X(e)), y = cy(rowOf(e)), yc = cy(rowOf(e) + 1);
+      const op = mode === "next" ? 0.3 : 1;
+      let s2 = `<g class="blk" data-n="${n}" opacity="${op}">`;
+      if (mode === "now") s2 += `<rect x="${x - 3}" y="${yc - 3}" width="${W + 6}" height="${W * 2 + 6}" rx="8" fill="#FFF1C2" stroke="#E5483B" stroke-width="3.5"><animate attributeName="stroke-opacity" values="1;.3;1" dur="1s" repeatCount="indefinite"/></rect>`;
+      s2 += `<use href="#i-cloudblock" x="${x}" y="${yc}" width="${W}" height="${W}" style="stroke:#13203F;stroke-width:2"/>`;
+      s2 += `<use href="#i-goomba" x="${x + 8}" y="${yc + 5}" width="${W - 16}" height="${W - 16}" style="stroke:#13203F;stroke-width:2"/>`;
+      s2 += `<rect x="${x + 2}" y="${y + 2}" width="${W - 4}" height="${W - 4}" rx="5" fill="${colorFor(e.off)}" stroke="#13203F" stroke-width="2.5"/>`;
+      s2 += `<text x="${x + W / 2}" y="${y + W / 2 + 5}" text-anchor="middle" font-size="15" font-weight="900" fill="#13203F">${n}</text></g>`;
+      return s2;
     };
-    if (prev) g += drawBlk(prev, i0, true);
-    grp.forEach((e, k) => { g += drawBlk(e, i0 + k + 1, false); });
+    if (prev && !done) {
+      const ax = cx(X(prev)) + W / 2, ay = cy(rowOf(prev)) + W / 2, bx = cx(X(cur)) + W / 2, by = cy(rowOf(cur)) + W / 2;
+      g += `<path d="M${ax} ${ay} H${bx} V${by + (by > ay ? -W / 2 : W / 2)}" fill="none" stroke="#E5483B" stroke-width="3" stroke-dasharray="5 4"/>`;
+    }
+    if (lo === 0) g += `<use href="#i-player" x="${cx(x0)}" y="${cy(1)}" width="${W}" height="${W}" style="stroke:#13203F;stroke-width:2.4"/>`;
+    win.forEach((e, k) => { const n = lo + k + 1, idx = lo + k; g += stackAt(e, n, done ? "done" : idx < i ? "done" : idx === i ? "now" : "next"); });
     g += `</svg>`;
-    const tabs = Array.from({ length: parts }, (_, k) => `<button class="parttab ${music.done[k] ? "done" : ""}" data-part="${k}" aria-pressed="${k === music.part}">${music.done[k] ? "✓ " : ""}Part ${k + 1}</button>`).join("");
+
+    let instr;
+    if (done) {
+      instr = `<div class="move" style="flex-basis:100%">${ic("star")}<div><div class="big">Song done!</div><div class="small">Turn on auto-scroll (Slow) and press play to hear your song.</div></div></div>`;
+    } else if (i === 0) {
+      instr = `<div class="move"><span class="arrow" style="background:#E4ECFF">${ic("arrow-u")}</span><div><div class="big">${rowOf(cur)} up</div><div class="small">Put stack 1 this many squares above the ground.</div></div></div>`;
+    } else {
+      const dx = X(cur) - X(prev), dy = rowOf(cur) - rowOf(prev);
+      const h = dx === 0
+        ? `<span class="arrow" style="background:#F1F3F7">${ic("same")}</span><div><div class="big">Same spot</div><div class="small">right on top of the last one</div></div>`
+        : `<span class="arrow" style="background:#E3F6EA">${ic("arrow-r")}</span><div><div class="big">${dx} right</div><div class="small">squares from the last stack</div></div>`;
+      const v = dy === 0
+        ? `<span class="arrow" style="background:#F1F3F7">${ic("same")}</span><div><div class="big">Same height</div><div class="small">not up, not down</div></div>`
+        : `<span class="arrow" style="background:${dy > 0 ? "#E4ECFF" : "#FFE6E3"}">${ic(dy > 0 ? "arrow-u" : "arrow-d")}</span><div><div class="big">${Math.abs(dy)} ${dy > 0 ? "up" : "down"}</div><div class="small">squares from the last stack</div></div>`;
+      instr = `<div class="move">${h}</div><div class="move">${v}</div>`;
+    }
     box.innerHTML = `
-      <div class="row" style="justify-content:space-between"><span class="count">${esc(songName())}</span><span class="note">Blocks ${i0 + 1} to ${i0 + grp.length} of ${ev.length}</span></div>
-      <div class="parttabs" role="group" aria-label="Song parts">${tabs}</div>
-      <p class="copyhint">Each note is a <b>Music Block</b> (colored, numbered) with a <b>Cloud Block + Goomba</b> right on top. Count the squares up from the ground and across, and put each one in the same spot. Tap a note to hear it.</p>
+      <div class="row" style="justify-content:space-between"><span class="count">${done ? esc(songName()) : `Stack ${i + 1} of ${ev.length}`}</span><span class="note">${esc(songName())}</span></div>
+      <div class="progress" aria-hidden="true"><i style="width:${Math.round(i / ev.length * 100)}%"></i></div>
+      <div class="instr">${instr}</div>
       <div class="copygrid" id="copygrid">${g}</div>
       <div class="navrow">
-        <button class="btn go" id="bPart">${ic("play")}Play this part</button>
-        <button class="btn" id="bSong">${ic("speaker")}Whole song</button>
-        <button class="btn spin" id="bNext" style="font-size:22px;min-height:58px;padding:8px 22px">${music.part < parts - 1 ? "I built it! Next part" : "I built it all!"}</button>
+        <button class="btn" id="bBack" ${i === 0 ? "disabled" : ""}>Back</button>
+        <button class="btn" id="bHear">${ic("speaker")}Hear it</button>
+        <button class="btn go" id="bSong">${ic("play")}Whole song</button>
+        <button class="btn spin" id="bNext" style="font-size:22px;min-height:58px;padding:8px 22px">${done ? "Start over" : "Done! Next"}</button>
       </div>`;
-    box._grp = grp; box._i0 = i0; box._parts = parts;
+    const cg = $("#copygrid"); if (cg) cg.scrollLeft = cg.scrollWidth;
   }
   $("#builder").addEventListener("click", e => {
-    const box = $("#builder"), ev = events();
+    const ev = events();
     const blk = e.target.closest(".blk");
     if (blk) { const n = Number(blk.dataset.n); if (ev[n - 1]) hear(ev[n - 1].off); return; }
-    const t = e.target.closest("[data-part]");
-    if (t) { music.part = Number(t.dataset.part); renderBuilder(); return; }
-    if (e.target.closest("#bPart")) {
-      const grp = box._grp, base = grp[0].col, i0 = box._i0;
-      play(grp.map(x => ({ ...x, col: x.col - base })), 0.25, k => {
-        $$("#copygrid .blk").forEach(b => b.classList.toggle("now", Number(b.dataset.n) === i0 + k + 1));
-      });
-      return;
-    }
+    if (e.target.closest("#bBack")) { music.step = Math.max(0, music.step - 1); renderBuilder(); const c = ev[music.step]; if (c) hear(c.off); return; }
+    if (e.target.closest("#bHear")) { const c = ev[Math.min(music.step, ev.length - 1)]; if (c) hear(c.off); return; }
     if (e.target.closest("#bSong")) { play(ev, 0.2); return; }
     const nx = e.target.closest("#bNext");
     if (nx) {
-      music.done[music.part] = true;
-      burst(nx);
-      if (music.part < box._parts - 1) music.part++;
+      if (music.step >= ev.length) music.step = 0;
+      else music.step++;
       renderBuilder();
+      const c = ev[music.step];
+      if (c) hear(c.off); else { burst(nx); extraLife(); $$(".stepbar .sb").forEach(b => b.classList.add("on")); }
     }
   });
   $$("[data-step]").forEach(b => b.addEventListener("click", () => {
@@ -1486,7 +1529,7 @@
   renderStickers();
   updateCount();
   renderParts();
-  renderSongs(); renderBuilder();
+  renderSongs(); renderBuilder(); renderTut();
   $("#startOut").textContent = music.start; $("#spaceOut").textContent = music.space;
   renderTune();
   const h = (location.hash || "").slice(1);
