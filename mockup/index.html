@@ -955,15 +955,11 @@
   // extra-life style jingle: six quick, bright, equal notes that bounce upward and finish high
   // (our own notes, in the same spirit as a classic 1-Up)
   function extraLife() {
-    const c = ctx(); if (!c) return; const t = c.currentTime + 0.01, d = 0.105;
-    // shape: small step up, big jump up, drop down, step up, jump up to the top note (held a bit longer)
-    [587, 659, 988, 784, 880, 1175].forEach((f, k) => {
-      const len = k === 5 ? d * 1.6 : d * 0.92;
-      chip(f, t + k * d, len, 0.11, 0.5);
-      chip(f * 2, t + k * d, Math.min(len, d * 0.5), 0.025, 0.125);
-    });
+    const c = ctx(); if (!c) return; const t = c.currentTime + 0.01, d = 0.09;
+    // six equal, clipped square-wave notes up high, quick and even, no fade
+    [1175, 1319, 1976, 1568, 1760, 2349].forEach((f, k) => chip(f, t + k * d, d * 0.95, 0.1, 0.5));
   }
-  // "I built it!" / save: a happy 3-note jingle
+  // "Save": a happy little 4-note jingle
   function cheer() {
     const c = ctx(); if (!c) return; const t = c.currentTime + 0.01;
     [[784, 0], [988, 0.09], [1175, 0.18], [1568, 0.27]].forEach(([f, d]) => chip(f, t + d, d === 0.27 ? 0.3 : 0.08, 0.1, 0.25));
