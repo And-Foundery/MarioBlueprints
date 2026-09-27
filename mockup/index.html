@@ -911,24 +911,53 @@
     };
     requestAnimationFrame(frame);
   }
-  // Our own 8-bit style sound effects, made with Web Audio (no game sound files)
-  function chip(freq, at, len, vol, type) {
+  // Our own NES-style sound effects, made with Web Audio (no game sound files).
+  // Old Nintendo chips used thin "pulse" waves (12.5% and 25% duty), hard note cuts and quick pitch slides.
+  const waves = {};
+  function pulseWave(c, duty) {
+    const key = String(duty);
+    if (waves[key]) return waves[key];
+    const n = 64, real = new Float32Array(n), imag = new Float32Array(n);
+    for (let k = 1; k < n; k++) real[k] = (2 / (k * Math.PI)) * Math.sin(k * Math.PI * duty);
+    return (waves[key] = c.createPeriodicWave(real, imag));
+  }
+  function chip(freq, at, len, vol, duty, slideTo) {
     const c = ctx(); if (!c) return;
     const o = c.createOscillator(), g = c.createGain();
-    o.type = type || "square"; o.frequency.setValueAtTime(freq, at);
-    g.gain.setValueAtTime(vol, at); g.gain.setValueAtTime(vol, at + len * 0.7); g.gain.exponentialRampToValueAtTime(0.0001, at + len);
+    o.setPeriodicWave(pulseWave(c, duty || 0.25));
+    o.frequency.setValueAtTime(freq, at);
+    if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, at + len);
+    g.gain.setValueAtTime(vol, at);
+    g.gain.setValueAtTime(vol, at + len - 0.01);
+    g.gain.linearRampToValueAtTime(0, at + len);
     o.connect(g); g.connect(c.destination); o.start(at); o.stop(at + len + 0.02);
   }
-  function blip() { const c = ctx(); if (!c) return; chip(1760, c.currentTime, 0.035, 0.05); }
+  // tick as each wedge passes: a tiny thin blip
+  function blip() { const c = ctx(); if (!c) return; chip(2093, c.currentTime, 0.03, 0.06, 0.125); }
+  // coin-style chime: a short note, then a higher ringing note a fourth up that fades
   function coin() {
     const c = ctx(); if (!c) return; const t = c.currentTime + 0.01;
-    chip(1175, t, 0.07, 0.09); chip(1568, t + 0.07, 0.45, 0.09);
+    chip(1047, t, 0.075, 0.12, 0.5);
+    const o = c.createOscillator(), g = c.createGain();
+    o.setPeriodicWave(pulseWave(c, 0.5)); o.frequency.setValueAtTime(1397, t + 0.075);
+    g.gain.setValueAtTime(0.12, t + 0.075); g.gain.setValueAtTime(0.12, t + 0.2); g.gain.linearRampToValueAtTime(0, t + 0.6);
+    o.connect(g); g.connect(c.destination); o.start(t + 0.075); o.stop(t + 0.62);
   }
+  // power-up-style: fast rising notes, each with a quick upward slide, layered with a lower echo
   function powerUp() {
     const c = ctx(); if (!c) return; const t = c.currentTime + 0.01;
-    [392, 523, 659, 784, 1047, 1319, 1568].forEach((f, k) => { chip(f, t + k * 0.055, 0.07, 0.07); chip(f * 1.5, t + k * 0.055 + 0.027, 0.05, 0.035); });
+    const notes = [262, 330, 392, 440, 523, 659, 784, 880, 1047];
+    notes.forEach((f, k) => {
+      chip(f, t + k * 0.045, 0.045, 0.1, 0.25, f * 1.12);
+      chip(f / 2, t + k * 0.045 + 0.02, 0.04, 0.05, 0.125, (f / 2) * 1.12);
+    });
   }
-  function ding() { coin(); }
+  // "I built it!" / save: a happy 3-note jingle
+  function cheer() {
+    const c = ctx(); if (!c) return; const t = c.currentTime + 0.01;
+    [[784, 0], [988, 0.09], [1175, 0.18], [1568, 0.27]].forEach(([f, d]) => chip(f, t + d, d === 0.27 ? 0.3 : 0.08, 0.1, 0.25));
+  }
+  function ding() { cheer(); }
   function coinBurst(from) {
     const r = from.getBoundingClientRect();
     for (let i = 0; i < 16; i++) {
@@ -1061,6 +1090,7 @@
       const pool = d.names.concat(EXTRA_NAMES);
       nameIdx = (nameIdx + 1) % pool.length;
       $("#nameInput").value = pool[nameIdx];
+      coin();
       return;
     }
     if (e.target.closest("#againBtn")) { window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }); spin(); return; }
@@ -1090,7 +1120,7 @@
     if (sb) {
       ideas.unshift({ id: Date.now(), idx: current, title: $("#nameInput").value.trim() || d.names[0], date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" }) });
       store.set("mb.ideas2", ideas);
-      updateCount(); burst(sb);
+      updateCount(); burst(sb); cheer();
       const old = sb.innerHTML; sb.innerHTML = ic("star") + "Saved!"; setTimeout(() => { sb.innerHTML = old; }, 1400);
     }
   });
