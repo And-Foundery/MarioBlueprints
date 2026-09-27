@@ -472,3 +472,13 @@ checked: yes / not yet
 | A "reach the goal riding Yoshi" clear condition | **Not found**, so the card now says "Bonus challenge: keep Yoshi the whole way!" (the kids' own challenge, not a game setting) |
 
 Removed: The Office theme idea.
+
+### Correction (after the kids tested it in the game)
+The first guide said to drag a Goomba onto a Note Block, and that didn't work in Mario Maker 2. What the sources say:
+- **Making a Music Block:** press and hold a Note Block and pick the Music Block from the menu.
+- **What picks the sound:** the object that *lands* on the Music Block (for example, a Goomba plays piano).
+- **Playing each note once:** put the object directly above the Music Block, overlapping a Cloud Block. It drops, hits the block once, and stays on the cloud.
+- **Walking enemies:** they can walk off and play extra notes, so they may need a small "cage" of blocks.
+- **Timing:** the song only plays in time if the screen moves at a steady rate (auto-scroll).
+
+The site now shows each note as a Music Block with a Cloud Block and Goomba on top. It adds a "try one note first" step and a "Not working?" help box.

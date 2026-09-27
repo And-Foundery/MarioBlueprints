@@ -293,6 +293,10 @@
   /* ---- Music build-along ---- */
   .howto3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   @media (max-width: 720px) { .howto3 { grid-template-columns: 1fr; } }
+  .howto4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .howto4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .howto4 { grid-template-columns: 1fr; } }
+  .howto4 .mstep p { font-size: 17px; font-weight: 700; }
   .howto3 .mstep p { font-size: 18px; font-weight: 800; }
   .songgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
   .songbtn { border: 3px solid var(--ink); border-radius: 16px; background: #fff; padding: 10px; display: flex; gap: 10px; align-items: center; font-weight: 900; text-align: left; min-height: 64px; box-shadow: 0 4px 0 var(--ink); }
@@ -530,34 +534,47 @@
       <div class="panel stack">
         <div>
           <h2>How Music Blocks work</h2>
-          <p class="lead">Three things to know. That's all!</p>
+          <p class="lead">Four steps. Every note in a song is built the same way.</p>
         </div>
-        <div class="howto3">
+        <div class="howto4">
           <div class="mstep">
             <span class="num">1</span>
-            <div class="recipe">
-              <span class="rbox"><svg class="ic" viewBox="0 0 48 48" style="width:64px;height:64px"><use href="#i-noteblock"/></svg></span><span class="plus">+</span><span class="rbox"><svg class="ic" viewBox="0 0 48 48" style="width:64px;height:64px"><use href="#i-goomba"/></svg></span>
-            </div>
-            <p>Put a Note Block. Drag a Goomba onto it. Now it's a Music Block!</p>
+            <svg class="diag" viewBox="0 0 200 96" aria-hidden="true" style="stroke:#13203F;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round">
+              <use href="#i-noteblock" x="18" y="22" width="52" height="52"/>
+              <path d="M82 48h34M106 38l12 10-12 10" fill="none" stroke-width="4"/>
+              <rect x="132" y="24" width="50" height="50" rx="8" fill="#FF8A3D"/><use href="#i-note" x="140" y="32" width="34" height="34"/>
+            </svg>
+            <p><b>Make a Music Block.</b> Press and hold the Note Block, then pick the <b>Music Block</b>.</p>
           </div>
           <div class="mstep">
             <span class="num">2</span>
-            <svg class="diag" viewBox="0 0 200 96" aria-hidden="true" style="stroke:#13203F;stroke-width:2.4">
-              <g><rect x="30" y="70" width="22" height="22" rx="4" fill="#E5483B"/><rect x="70" y="56" width="22" height="22" rx="4" fill="#FF8A3D"/><rect x="110" y="42" width="22" height="22" rx="4" fill="#FFC93C"/><rect x="150" y="28" width="22" height="22" rx="4" fill="#22A45D"/></g>
-              <path d="M40 60 L160 18" fill="none" stroke-dasharray="4 5"/><path d="M152 16l9 1-5 8" fill="none"/>
+            <svg class="diag" viewBox="0 0 200 96" aria-hidden="true" style="stroke:#13203F;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round">
+              <use href="#i-cloudblock" x="76" y="2" width="48" height="48"/>
+              <use href="#i-goomba" x="84" y="8" width="32" height="32"/>
+              <rect x="78" y="48" width="44" height="44" rx="7" fill="#FF8A3D"/><use href="#i-note" x="86" y="56" width="28" height="28"/>
+              <path d="M140 12v40M134 44l6 8 6-8" fill="none" stroke="#E5483B" stroke-width="3"/>
             </svg>
-            <p>Each square higher plays a higher note.</p>
+            <p><b>Add a Cloud Block on top</b>, and put a <b>Goomba inside the cloud</b>. It drops, plays one note, and stays on the cloud.</p>
           </div>
           <div class="mstep">
             <span class="num">3</span>
             <svg class="diag" viewBox="0 0 200 96" aria-hidden="true" style="stroke:#13203F;stroke-width:2.4">
-              <g fill="#fff"><rect x="20" y="50" width="16" height="16" rx="3"/><rect x="52" y="38" width="16" height="16" rx="3"/><rect x="84" y="50" width="16" height="16" rx="3"/><rect x="116" y="30" width="16" height="16" rx="3"/><rect x="148" y="42" width="16" height="16" rx="3"/><rect x="180" y="50" width="16" height="16" rx="3"/></g>
+              <g><rect x="30" y="70" width="22" height="22" rx="4" fill="#E5483B"/><rect x="70" y="56" width="22" height="22" rx="4" fill="#FF8A3D"/><rect x="110" y="42" width="22" height="22" rx="4" fill="#FFC93C"/><rect x="150" y="28" width="22" height="22" rx="4" fill="#22A45D"/></g>
+              <path d="M40 60 L160 18" fill="none" stroke-dasharray="4 5"/><path d="M152 16l9 1-5 8" fill="none"/>
+            </svg>
+            <p><b>Higher block = higher note.</b> Each square up is one step higher.</p>
+          </div>
+          <div class="mstep">
+            <span class="num">4</span>
+            <svg class="diag" viewBox="0 0 200 96" aria-hidden="true" style="stroke:#13203F;stroke-width:2.4">
+              <g fill="#FF8A3D"><rect x="20" y="50" width="16" height="16" rx="3"/><rect x="52" y="38" width="16" height="16" rx="3"/><rect x="84" y="50" width="16" height="16" rx="3"/><rect x="116" y="30" width="16" height="16" rx="3"/><rect x="148" y="42" width="16" height="16" rx="3"/><rect x="180" y="50" width="16" height="16" rx="3"/></g>
               <rect x="44" y="10" width="92" height="74" rx="6" fill="none" stroke="#E5483B" stroke-width="3.4" stroke-dasharray="8 5"/>
               <path d="M142 22h26M160 15l8 7-8 7" fill="none" stroke="#E5483B" stroke-width="3.4"/>
             </svg>
-            <p>Turn on auto-scroll. The song plays as the screen moves along.</p>
+            <p><b>Turn on auto-scroll.</b> Each Goomba drops when the screen reaches it, so the song plays as you move.</p>
           </div>
         </div>
+        <div class="tipline"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-star"/></svg><span><b>Try one note first!</b> Build just one Music Block + Cloud + Goomba, then press play. When you hear it, you're ready for a whole song.</span></div>
       </div>
 
       <div class="panel stack" id="buildPanel">
@@ -576,11 +593,12 @@
         <div>
           <h3 style="font-size:22px;margin-bottom:8px">3. Finish and test</h3>
           <ul class="checks">
-            <li><label><input type="checkbox" id="ck1"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-goomba"/></svg>Drag a Goomba onto every Note Block.</label></li>
-            <li><label><input type="checkbox" id="ck2"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-arrow-r"/></svg>Turn on auto-scroll (try Slow).</label></li>
-            <li><label><input type="checkbox" id="ck3"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-play"/></svg>Play it! Too fast? Leave more squares between blocks.</label></li>
+            <li><label><input type="checkbox" id="ck1"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-noteblock"/></svg>Every block is a <b>&nbsp;Music Block&nbsp;</b> (hold the Note Block to switch it).</label></li>
+            <li><label><input type="checkbox" id="ck2"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-cloudblock"/></svg>Every Music Block has a Cloud Block on top, with a Goomba inside the cloud.</label></li>
+            <li><label><input type="checkbox" id="ck3"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-arrow-r"/></svg>Auto-scroll is on (start with Slow).</label></li>
+            <li><label><input type="checkbox" id="ck4"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-player"/></svg>Mario walks along the ground below. Don't jump into the blocks!</label></li>
           </ul>
-          <div class="tipline" style="margin-top:10px"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-cloudblock"/></svg><span>Does a note keep repeating? Put a Cloud Block right above that Music Block.</span></div>
+          <div class="tipline" style="margin-top:10px"><svg class="ic" viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#i-question"/></svg><span><b>Not working?</b> No sound: check it's a Music Block, not a Note Block. Extra notes: the Goomba walked off the cloud, so put a block on each side of it like a little cage. Too fast: leave more squares between the blocks.</span></div>
         </div>
         <details class="grown">
           <summary>Grown-ups: settings</summary>
@@ -589,7 +607,7 @@
               <span class="stepper"><button type="button" data-step="start" data-d="-1" aria-label="Lower">−</button><output id="startOut">3</output><button type="button" data-step="start" data-d="1" aria-label="Higher">+</button></span>
             </label>
             <label>Squares per beat
-              <span class="stepper"><button type="button" data-step="space" data-d="-1" aria-label="Fewer">−</button><output id="spaceOut">1</output><button type="button" data-step="space" data-d="1" aria-label="More">+</button></span>
+              <span class="stepper"><button type="button" data-step="space" data-d="-1" aria-label="Fewer">−</button><output id="spaceOut">2</output><button type="button" data-step="space" data-d="1" aria-label="More">+</button></span>
             </label>
             <label for="soundSel">Sound (what you drag onto the Note Block)
               <select id="soundSel">
@@ -706,7 +724,7 @@
     { id: "pipe", name: "Warp Pipe", icon: "pipe", does: "Takes you to another place, like a secret sub-area." },
     { id: "onoff", name: "ON/OFF Switch", icon: "onoff", does: "Hit it to flip which red and blue blocks are solid." },
     { id: "dotted", name: "Red & Blue Blocks", icon: "brick", does: "Solid or see-through, depending on the ON/OFF Switch." },
-    { id: "noteblock", name: "Note Block", icon: "noteblock", does: "Bounces you. Drop an enemy or item on it to make a Music Block." },
+    { id: "noteblock", name: "Note Block", icon: "noteblock", does: "Bounces you. Press and hold it to switch to a Music Block, which plays a note when something lands on it." },
     { id: "cloudblock", name: "Cloud Block", icon: "cloudblock", does: "A soft cloud you can stand on." },
     { id: "lift", name: "Lift", icon: "lift", does: "A platform you ride. Put it on a Track and it follows the track." },
     { id: "track", name: "Track", icon: "track", does: "Draw a path, and lifts or enemies on it ride along." },
@@ -835,13 +853,13 @@
     { w: "music", names: ["Block Party", "Don't Tetris Me Now", "The Falling Block Boogie"], song: "tetris",
       idea: "Don't touch anything! The screen moves by itself while Music Blocks play the Tetris song.",
       style: "smb", theme: "Ground", time: "Day", why: "A simple, flat level lets the song be the star. Use slow auto-scroll.",
-      parts: ["noteblock", "goomba", "sign"],
+      parts: ["noteblock", "cloudblock", "goomba", "sign"],
       steps: ["An arrow sign and a flat floor. Tell the player to relax.", "The song! Copy the picture in the Music Blocks tab.", "One last big note, then the flag."],
       goal: "Reach the flag.", secret: "Hide a second song in a sub-area.", stars: 1, mins: 45 },
     { w: "music", names: ["In the Hall of the Mountain Boo", "Night at the Boo-seum", "Boo-dunit"], song: "mountain",
       idea: "A spooky song! The screen slides through a haunted house while Music Blocks play 'In the Hall of the Mountain King'.",
       style: "smw", theme: "Ghost House", time: "Day", why: "The song sounds sneaky and spooky, just like a ghost house.",
-      parts: ["noteblock", "goomba", "boo", "sign"],
+      parts: ["noteblock", "cloudblock", "goomba", "boo"],
       steps: ["A sign that says 'Shhh...' and a floor to stand on.", "Copy the song picture from the Music Blocks tab.", "Put the last blocks closer together so the song speeds up at the end!"],
       goal: "Reach the flag.", secret: "Boos hiding near the ceiling.", stars: 2, mins: 50 },
     { w: "music", names: ["Ode to Toad", "Joy to the Whirled", "Sky-mphony No. 9"], song: "ode",
@@ -1280,7 +1298,7 @@
     toccata: { g: "spooky", name: "Spooky Organ (Toccata)", n: [[9,1],[7,1],[9,6],[7,1],[5,1],[4,1],[2,1],[1,3],[2,6]] },
     tetris: { g: "game", name: "Tetris song", n: [[4,2],[-1,1],[0,1],[2,2],[0,1],[-1,1],[-3,2],[-3,1],[0,1],[4,2],[2,1],[0,1],[-1,3],[0,1],[2,2],[4,2],[0,2],[-3,2],[-3,4]] }
   };
-  const music = { song: "sunny", sound: "piano", start: 3, space: 1, part: 0, done: {}, custom: null };
+  const music = { song: "sunny", sound: "piano", start: 3, space: 2, part: 0, done: {}, custom: null };
 
   function events() {
     if (music.song === "custom") return music.custom || [];
@@ -1312,7 +1330,7 @@
     const X = e => e.col * music.space;
     const i0 = music.part * PER, grp = ev.slice(i0, i0 + PER), prev = ev[i0 - 1];
     const x0 = (prev ? X(prev) : X(grp[0])) - 2, x1 = X(grp[grp.length - 1]) + 2;
-    const topRow = music.start + (max - min) + 1;
+    const topRow = music.start + (max - min) + 2;
     const W = 30, LW = 30, BOT = 26;
     const cols = x1 - x0 + 1, width = LW + cols * W + 4, height = (topRow + 1) * W + BOT;
     const cx = x => LW + (x - x0) * W, cy = r => (topRow - r) * W;
@@ -1330,7 +1348,12 @@
     if (!prev) g += `<use href="#i-player" x="${cx(x0)}" y="${cy(1)}" width="${W}" height="${W}" style="stroke:#13203F;stroke-width:2.4"/>`;
     const drawBlk = (e, n, ghost) => {
       const x = cx(X(e)), y = cy(rowOf(e));
-      return `<g class="blk" data-n="${n}" opacity="${ghost ? 0.35 : 1}"><rect x="${x + 2}" y="${y + 2}" width="${W - 4}" height="${W - 4}" rx="5" fill="${colorFor(e.off)}" stroke="#13203F" stroke-width="2.5"/><text x="${x + W / 2}" y="${y + W / 2 + 5}" text-anchor="middle" font-size="14" font-weight="900" fill="#13203F">${n}</text></g>`;
+      const yc = cy(rowOf(e) + 1);
+      return `<g class="blk" data-n="${n}" opacity="${ghost ? 0.35 : 1}">
+        <use href="#i-cloudblock" x="${x}" y="${yc}" width="${W}" height="${W}" style="stroke:#13203F;stroke-width:2"/>
+        <use href="#i-goomba" x="${x + 6}" y="${yc + 4}" width="${W - 12}" height="${W - 12}" style="stroke:#13203F;stroke-width:2"/>
+        <rect x="${x + 2}" y="${y + 2}" width="${W - 4}" height="${W - 4}" rx="5" fill="${colorFor(e.off)}" stroke="#13203F" stroke-width="2.5"/>
+        <text x="${x + W / 2}" y="${y + W / 2 + 5}" text-anchor="middle" font-size="14" font-weight="900" fill="#13203F">${n}</text></g>`;
     };
     if (prev) g += drawBlk(prev, i0, true);
     grp.forEach((e, k) => { g += drawBlk(e, i0 + k + 1, false); });
@@ -1339,7 +1362,7 @@
     box.innerHTML = `
       <div class="row" style="justify-content:space-between"><span class="count">${esc(songName())}</span><span class="note">Blocks ${i0 + 1} to ${i0 + grp.length} of ${ev.length}</span></div>
       <div class="parttabs" role="group" aria-label="Song parts">${tabs}</div>
-      <p class="copyhint">Count the squares up from the ground (the numbers on the left) and put each numbered block in the same spot. Tap a block to hear it.</p>
+      <p class="copyhint">Each note is a <b>Music Block</b> (colored, numbered) with a <b>Cloud Block + Goomba</b> right on top. Count the squares up from the ground and across, and put each one in the same spot. Tap a note to hear it.</p>
       <div class="copygrid" id="copygrid">${g}</div>
       <div class="navrow">
         <button class="btn go" id="bPart">${ic("play")}Play this part</button>
