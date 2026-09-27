@@ -222,7 +222,7 @@
 
   .burst { position: fixed; pointer-events: none; z-index: 9; width: 30px; height: 30px; animation: pop 900ms ease-out forwards; }
   @keyframes pop { from { transform: translate(0,0) scale(.4) rotate(0); opacity: 1; } to { transform: translate(var(--dx), var(--dy)) scale(1) rotate(200deg); opacity: 0; } }
-  @media (prefers-reduced-motion: reduce) { .spinning svg.big, .spinning .val { animation: none; } .burst { display: none; } .btn, .tab { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .spinning svg.big, .spinning .val { animation: none; } .burst:not(.coinfly) { display: none; } .btn, .tab { transition: none; } }
 
   /* ---- Idea Wheel ---- */
   .wheelwrap { display: grid; grid-template-columns: minmax(260px, 380px) 1fr; gap: 22px; align-items: start; }
@@ -232,6 +232,13 @@
   .wheelbox svg.wheel { width: 100%; height: 100%; display: block; transition: transform 2.6s cubic-bezier(.17,.84,.26,1); }
   .wheelbox .pointer { position: absolute; top: -10px; left: 50%; width: 40px; height: 46px; margin-left: -20px; z-index: 2; filter: drop-shadow(0 3px 0 var(--ink)); }
   .wheel .wedge { cursor: pointer; }
+  .wheelbox .pointer { transform-origin: 50% 8px; }
+  .wheelbox .pointer.flick { animation: flick .14s ease-out; }
+  @keyframes flick { 0% { transform: rotate(0); } 40% { transform: rotate(-24deg); } 100% { transform: rotate(0); } }
+  .wheel .wedge.win path { animation: winpulse .5s ease-in-out 4 alternate; }
+  @keyframes winpulse { from { filter: brightness(1); } to { filter: brightness(1.35) saturate(1.2); } }
+  .burst.coinfly { animation: coinpop 1.05s cubic-bezier(.2,.7,.3,1) forwards; }
+  @keyframes coinpop { 0% { transform: translate(0,0) scale(.3); opacity: 1; } 60% { opacity: 1; } 100% { transform: translate(var(--dx), var(--dy)) scale(1.1) rotateY(540deg); opacity: 0; } }
   .wheel .wedge:hover path { filter: brightness(1.06); }
   .hub { cursor: pointer; }
   .legend { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; width: 100%; max-width: 380px; }
@@ -862,8 +869,7 @@
 
   const wheel = $("#wheel");
   wheel.innerHTML = wheelHTML;
-  const rot = wheel;
-  if (reduced) rot.style.transition = "none";
+  wheel.style.transition = "none";
   $("#hubBtn").addEventListener("click", () => spin());
   let angle = 0, spinning = false, current = null, nameIdx = 0, lastIdea = -1;
 
@@ -873,35 +879,71 @@
     lastIdea = idx;
     return idx;
   }
+  const easeOutBack = t => { const c1 = 0.9, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
   function spinTo(wi) {
     if (spinning) return;
     spinning = true;
-    const target = 360 - (wi * 60 + 30);
-    const base = angle - (angle % 360);
-    angle = base + 360 * 4 + target + (Math.random() * 30 - 15);
-    rot.style.transform = `rotate(${angle}deg)`;
-    if (!reduced) ticks();
-    const done = () => { spinning = false; showIdea(pickIdea(wi), true); ding(); if (!reduced) burst($("#card")); };
-    if (reduced) done(); else setTimeout(done, 2650);
+    $$(".wedge.win").forEach(w => w.classList.remove("win"));
+    $("#spinBtn").disabled = true;
+    const start = angle;
+    const target = 360 - (wi * 60 + 30) + (Math.random() * 30 - 15);
+    let end = start - (start % 360) + 360 * 5 + target;
+    if (end - start < 1800) end += 360;
+    const dur = 3600, t0 = performance.now();
+    let lastSlot = Math.floor(start / 60);
+    const pointer = $(".pointer");
+    const frame = now => {
+      const t = Math.min(1, (now - t0) / dur);
+      const a = start + (end - start) * easeOutBack(t);
+      wheel.style.transform = `rotate(${a}deg)`;
+      const slot = Math.floor(a / 60);
+      if (slot !== lastSlot) {
+        lastSlot = slot; blip();
+        pointer.classList.remove("flick"); void pointer.getBoundingClientRect(); pointer.classList.add("flick");
+      }
+      if (t < 1) requestAnimationFrame(frame);
+      else {
+        angle = end; spinning = false; $("#spinBtn").disabled = false;
+        const wedge = $(`.wedge[data-w="${wi}"]`); if (wedge) wedge.classList.add("win");
+        powerUp(); coinBurst($(".wheelbox"));
+        setTimeout(() => { showIdea(pickIdea(wi), true); coin(); }, 450);
+      }
+    };
+    requestAnimationFrame(frame);
   }
-  function ticks() {
+  // Our own 8-bit style sound effects, made with Web Audio (no game sound files)
+  function chip(freq, at, len, vol, type) {
     const c = ctx(); if (!c) return;
-    const g = c.createGain(); g.gain.value = 0.12; g.connect(c.destination);
-    let t = 0;
-    for (let k = 0; k < 26; k++) {
-      t += 0.03 + Math.pow(k / 26, 2.2) * 0.22;
-      if (t > 2.55) break;
-      const o = c.createOscillator(), e = c.createGain();
-      o.type = "square"; o.frequency.value = 1500; o.connect(e); e.connect(g);
-      const at = c.currentTime + t;
-      e.gain.setValueAtTime(0.8, at); e.gain.exponentialRampToValueAtTime(0.001, at + 0.03);
-      o.start(at); o.stop(at + 0.04);
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = type || "square"; o.frequency.setValueAtTime(freq, at);
+    g.gain.setValueAtTime(vol, at); g.gain.setValueAtTime(vol, at + len * 0.7); g.gain.exponentialRampToValueAtTime(0.0001, at + len);
+    o.connect(g); g.connect(c.destination); o.start(at); o.stop(at + len + 0.02);
+  }
+  function blip() { const c = ctx(); if (!c) return; chip(1760, c.currentTime, 0.035, 0.05); }
+  function coin() {
+    const c = ctx(); if (!c) return; const t = c.currentTime + 0.01;
+    chip(1175, t, 0.07, 0.09); chip(1568, t + 0.07, 0.45, 0.09);
+  }
+  function powerUp() {
+    const c = ctx(); if (!c) return; const t = c.currentTime + 0.01;
+    [392, 523, 659, 784, 1047, 1319, 1568].forEach((f, k) => { chip(f, t + k * 0.055, 0.07, 0.07); chip(f * 1.5, t + k * 0.055 + 0.027, 0.05, 0.035); });
+  }
+  function ding() { coin(); }
+  function coinBurst(from) {
+    const r = from.getBoundingClientRect();
+    for (let i = 0; i < 16; i++) {
+      const el = document.createElement("div");
+      el.className = "burst coinfly";
+      el.innerHTML = ic(i % 4 ? "coin" : "star");
+      el.firstChild.style.width = "34px"; el.firstChild.style.height = "34px";
+      const a = (Math.PI * 2 * i) / 16;
+      el.style.left = r.left + r.width / 2 - 17 + "px";
+      el.style.top = r.top + r.height / 2 - 17 + "px";
+      el.style.setProperty("--dx", Math.cos(a) * (140 + (i % 3) * 30) + "px");
+      el.style.setProperty("--dy", Math.sin(a) * (120 + (i % 2) * 40) - 40 + "px");
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1100);
     }
-  }
-  function ding() {
-    const c = ctx(); if (!c) return;
-    const g = c.createGain(); g.gain.value = 0.5; g.connect(c.destination);
-    [0, 4, 7, 12].forEach((n, k) => tone(c, g, 72 + n, c.currentTime + k * 0.07, 0.3, "beep"));
   }
   const spin = () => spinTo(Math.floor(Math.random() * WEDGES.length));
   $("#spinBtn").addEventListener("click", spin);
@@ -962,7 +1004,7 @@
     current = idx; nameIdx = 0;
     const musicBtn = d.w === "music"
       ? `<button class="btn" data-go-music="${d.song || ""}">${ic("noteblock")}${d.song ? "Build this song" : "Open the Tune Maker"}</button>` : "";
-    $("#card").innerHTML = `<article class="ideacardbig ${flip && !reduced ? "flip" : ""}">
+    $("#card").innerHTML = `<article class="ideacardbig ${flip ? "flip" : ""}">
       <div class="cardhead" style="background:${w.color}">
         ${ic(w.icon)}<span class="kind">${esc(w.name)}</span>
         <span class="meta"><span class="pill">${starsHTML(d.stars)}</span><span class="pill">${ic("watch")}about ${d.mins} min</span></span>
