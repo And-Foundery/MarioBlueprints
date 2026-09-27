@@ -906,7 +906,7 @@
         angle = end; spinning = false; $("#spinBtn").disabled = false;
         const wedge = $(`.wedge[data-w="${wi}"]`); if (wedge) wedge.classList.add("win");
         extraLife(); coinBurst($(".wheelbox"));
-        setTimeout(() => { showIdea(pickIdea(wi), true); coin(); }, 450);
+        setTimeout(() => { showIdea(pickIdea(wi), true); }, 450);
       }
     };
     requestAnimationFrame(frame);
@@ -956,9 +956,11 @@
   // (our own notes, in the same spirit as a classic 1-Up)
   function extraLife() {
     const c = ctx(); if (!c) return; const t = c.currentTime + 0.01, d = 0.105;
-    [784, 988, 1319, 1175, 1568, 1976].forEach((f, k) => {
-      chip(f, t + k * d, d * 0.92, 0.11, 0.5);
-      chip(f * 2, t + k * d, d * 0.5, 0.025, 0.125);
+    // shape: small step up, big jump up, drop down, step up, jump up to the top note (held a bit longer)
+    [587, 659, 988, 784, 880, 1175].forEach((f, k) => {
+      const len = k === 5 ? d * 1.6 : d * 0.92;
+      chip(f, t + k * d, len, 0.11, 0.5);
+      chip(f * 2, t + k * d, Math.min(len, d * 0.5), 0.025, 0.125);
     });
   }
   // "I built it!" / save: a happy 3-note jingle
