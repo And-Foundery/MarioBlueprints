@@ -411,6 +411,33 @@
   .cstep p { margin: 0; font-size: 18px; font-weight: 800; }
   .instr { display: flex; gap: 12px; flex-wrap: wrap; }
   .instr .move { flex: 1 1 200px; }
+
+  .mission-panel { border-width: 4px; }
+  .mhead { display: flex; gap: 12px; align-items: center; }
+  .mprog { display: flex; gap: 10px; align-items: center; }
+  .mprog .progress { flex: 1; }
+  .mscreen { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; border: 3px solid var(--ink); border-radius: 22px; background: var(--sky); padding: 18px; }
+  @media (max-width: 760px) { .mscreen { grid-template-columns: 1fr; } }
+  .mscreen .mpic { background: #fff; border: 3px solid var(--ink); border-radius: 16px; overflow-x: auto; line-height: 0; }
+  .mscreen .mpic svg { max-width: 100%; height: auto; }
+  .mscreen .mpic.wide svg { max-width: none; }
+  .mscreen .mtext { display: flex; flex-direction: column; gap: 14px; }
+  .mtag { align-self: flex-start; background: var(--ink); color: #fff; border-radius: 999px; padding: 3px 12px; font-weight: 900; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+  .mbig { font-family: "Lilita One", sans-serif; font-size: clamp(26px, 4.4vw, 36px); line-height: 1.1; }
+  .mtext p { margin: 0; font-size: 19px; font-weight: 800; }
+  .nums { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .num2 { border: 3px solid var(--ink); border-radius: 18px; background: #fff; padding: 10px 12px; display: flex; align-items: center; gap: 10px; }
+  .num2 svg.ic { width: 44px; height: 44px; }
+  .num2 b { font-family: "Lilita One", sans-serif; font-weight: 400; font-size: 44px; line-height: 1; }
+  .num2 small { display: block; font-weight: 900; color: var(--ink-soft); font-size: 14px; }
+  .mchecks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .mchecks label { display: flex; gap: 10px; align-items: center; border: 3px solid var(--ink); border-radius: 14px; padding: 10px; background: #fff; font-weight: 800; font-size: 17px; cursor: pointer; }
+  .mchecks input { width: 28px; height: 28px; accent-color: var(--green); flex: none; }
+  .mchecks label:has(input:checked) { background: #E3F6EA; }
+  .mnav { display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; grid-column: 1 / -1; }
+  .helpbox { background: #FFE9C7; border: 3px solid var(--ink); border-radius: 14px; padding: 12px; font-weight: 800; }
+  .helpbox ul { margin: 6px 0 0; padding-left: 20px; }
+  .section-title { color: #fff; text-shadow: 0 3px 0 var(--ink); font-size: clamp(24px, 4vw, 30px); margin-top: 8px; }
 </style>
 
 <!-- Icon set: drawn for this project, no game sprites -->
@@ -552,6 +579,20 @@
 
     <!-- MUSIC -->
     <section class="stack" data-panel="music" hidden>
+      <div class="panel stack mission-panel" id="missionPanel">
+        <div class="mhead">
+          <svg class="ic" viewBox="0 0 48 48" style="width:54px;height:54px"><use href="#i-noteblock"/></svg>
+          <div>
+            <h2>Tetris Challenge</h2>
+            <p class="lead">Build the Tetris song in Mario Maker, one small step at a time.</p>
+          </div>
+        </div>
+        <div class="mprog"><div class="progress"><i id="mBar"></i></div><span id="mCount" class="note"></span></div>
+        <div id="mission"></div>
+      </div>
+
+      <h2 class="section-title">Learn more and try other songs</h2>
+
       <div class="panel stack">
         <div class="stepbar" aria-label="Three steps">
           <span class="sb on">1 Build one</span><span class="sb">2 Copy it</span><span class="sb">3 Make a song</span>
@@ -1305,6 +1346,164 @@
   $("#songGrid").addEventListener("click", e => { const b = e.target.closest("[data-song]"); if (b) { selectSong(b.dataset.song); play(events(), 0.2); } });
   $("#soundSel").addEventListener("change", e => { music.sound = e.target.value; hear(0); });
 
+  // ===== Tetris Challenge: a guided mission =====
+  const M = { song: "tetris", start: 3, space: 2, group: 4 };
+  function mEvents() { let col = 0; return SONGS[M.song].n.map(([off, dur]) => { const e = { col, off, dur }; col += dur; return e; }); }
+  const mev = mEvents();
+  const mMin = Math.min(...mev.map(e => e.off));
+  const mHeight = e => M.start + e.off - mMin;
+  const mX = e => e.col * M.space;
+  const SCREENS = [{ t: "setup" }, { t: "one" }, { t: "spot" }];
+  mev.forEach((e, k) => {
+    SCREENS.push({ t: "place", k });
+    if ((k + 1) % M.group === 0 || k === mev.length - 1) SCREENS.push({ t: "test", from: k + 1 - ((k % M.group) + 1), to: k });
+  });
+  SCREENS.push({ t: "finish" });
+  let mStep = Math.min(store.get("mb.tetrisStep", 0), SCREENS.length - 1);
+  let mHelp = false;
+
+  function stackSVG(x, y, W, color, n, mode) {
+    const op = mode === "next" ? 0.28 : 1;
+    let g = `<g class="blk" data-n="${n}" opacity="${op}">`;
+    if (mode === "now") g += `<rect x="${x - 4}" y="${y - W - 4}" width="${W + 8}" height="${W * 2 + 8}" rx="8" fill="#FFF1C2" stroke="#E5483B" stroke-width="4"><animate attributeName="stroke-opacity" values="1;.25;1" dur="1s" repeatCount="indefinite"/></rect>`;
+    g += `<use href="#i-cloudblock" x="${x}" y="${y - W}" width="${W}" height="${W}" style="stroke:#13203F;stroke-width:2"/>`;
+    g += `<use href="#i-goomba" x="${x + W * 0.22}" y="${y - W + W * 0.14}" width="${W * 0.56}" height="${W * 0.56}" style="stroke:#13203F;stroke-width:2"/>`;
+    g += `<rect x="${x + 2}" y="${y + 2}" width="${W - 4}" height="${W - 4}" rx="6" fill="${color}" stroke="#13203F" stroke-width="2.5"/>`;
+    if (n) g += `<text x="${x + W / 2}" y="${y + W / 2 + 6}" text-anchor="middle" font-size="${W * 0.45}" font-weight="900" fill="#13203F" font-family="Nunito, sans-serif">${n}</text>`;
+    return g + `</g>`;
+  }
+
+  // Picture around stack k: ground, height ruler, earlier stacks, the one to place now
+  function placePic(k) {
+    const lo = Math.max(0, k - 2), hi = Math.min(mev.length - 1, k + 1);
+    const win = mev.slice(lo, hi + 1);
+    const x0 = mX(win[0]) - 2, x1 = mX(win[win.length - 1]) + 2;
+    const top = M.start + (Math.max(...mev.map(e => e.off)) - mMin) + 2;
+    const W = 36, LW = 34, cols = x1 - x0 + 1;
+    const width = LW + cols * W + 6, height = (top + 1) * W + 10;
+    const cx = x => LW + (x - x0) * W, cy = r => (top - r) * W;
+    let g = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Where stack ${k + 1} goes" font-family="Nunito, sans-serif">`;
+    const cur = mev[k], hRow = mHeight(cur);
+    for (let r = 1; r <= top; r++) {
+      const hot = r === hRow;
+      g += `<rect x="${LW}" y="${cy(r)}" width="${cols * W}" height="${W}" fill="${hot ? "#FFF6D6" : r % 2 ? "#FFFFFF" : "#F5F8FE"}"/>`;
+      g += `<text x="${LW - 7}" y="${cy(r) + W / 2 + 6}" text-anchor="end" font-size="${hot ? 18 : 13}" font-weight="900" fill="${hot ? "#E5483B" : "#98A3BD"}">${r}</text>`;
+    }
+    for (let x = x0; x <= x1 + 1; x++) g += `<line x1="${cx(x)}" x2="${cx(x)}" y1="0" y2="${cy(0)}" stroke="#DCE5F5"/>`;
+    g += `<rect x="${LW}" y="${cy(0)}" width="${cols * W}" height="${W}" fill="#C87B3E"/><rect x="${LW}" y="${cy(0)}" width="${cols * W}" height="7" fill="#4DB654"/>`;
+    // height guide from the ground up to the new stack
+    const gx = cx(mX(cur)) + W / 2;
+    g += `<path d="M${gx} ${cy(0)} V${cy(hRow) + W}" stroke="#E5483B" stroke-width="3" stroke-dasharray="4 5"/>`;
+    // "right" guide from the last stack
+    if (k > 0) {
+      const pv = mev[k - 1], px = cx(mX(pv)) + W / 2, gy = cy(0) + W / 2 + 2;
+      g += `<path d="M${px} ${gy} H${gx}" stroke="#22A45D" stroke-width="4"/><path d="M${gx - 8} ${gy - 6} L${gx} ${gy} L${gx - 8} ${gy + 6}" fill="none" stroke="#22A45D" stroke-width="4"/>`;
+      for (let x = mX(pv) + 1; x <= mX(cur); x++) g += `<circle cx="${cx(x) + W / 2}" cy="${gy}" r="5" fill="#fff" stroke="#22A45D" stroke-width="3"/>`;
+    }
+    win.forEach((e, idx) => {
+      const n = lo + idx;
+      g += stackSVG(cx(mX(e)), cy(mHeight(e)), W, colorFor(e.off), n + 1, n < k ? "done" : n === k ? "now" : "next");
+    });
+    return g + `</svg>`;
+  }
+
+  function simpleScene(inner) {
+    return `<svg viewBox="0 0 300 200" role="img" aria-label="Picture"><rect width="300" height="200" fill="#8FD3FF"/><rect y="164" width="300" height="36" fill="#C87B3E"/><rect y="164" width="300" height="7" fill="#4DB654"/>${inner}</svg>`;
+  }
+
+  function renderMission() {
+    const sc = SCREENS[mStep];
+    const isLast = mStep === SCREENS.length - 1;
+    $("#mBar").style.width = Math.round(mStep / (SCREENS.length - 1) * 100) + "%";
+    $("#mCount").textContent = `Step ${mStep + 1} of ${SCREENS.length}`;
+    let pic = "", text = "", nextLabel = "Next", wide = false;
+    if (sc.t === "setup") {
+      pic = simpleScene(`<rect x="70" y="40" width="160" height="96" rx="12" fill="#fff" stroke="#13203F" stroke-width="3"/><use href="#i-cart" x="86" y="56" width="40" height="40" style="stroke:#13203F;stroke-width:2.4"/><use href="#i-ground" x="134" y="56" width="40" height="40" style="stroke:#13203F;stroke-width:2.4"/><use href="#i-arrow-r" x="182" y="56" width="36" height="40" style="stroke:#13203F;stroke-width:2.4"/><text x="150" y="122" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="900" font-size="15" fill="#13203F">New course</text>`);
+      text = `<span class="mtag">Get ready</span><div class="mbig">Make a new course</div>
+        <ul class="mchecks">
+          <li><label><input type="checkbox">Game style: <b>&nbsp;Super Mario Bros.</b></label></li>
+          <li><label><input type="checkbox">Course theme: <b>&nbsp;Ground</b></label></li>
+          <li><label><input type="checkbox">In the course settings, set <b>&nbsp;Auto-scroll: Slow</b></label></li>
+        </ul>`;
+    } else if (sc.t === "one") {
+      pic = simpleScene(`<use href="#i-player" x="20" y="126" width="38" height="38" style="stroke:#13203F;stroke-width:2.4"/>` + stackSVG(131, 100, 38, "#FF8A3D", "", "done") + `<path d="M186 96a16 16 0 0 1 0 24M195 88a28 28 0 0 1 0 40" fill="none" stroke="#E5483B" stroke-width="3.4" stroke-linecap="round"/>`);
+      text = `<span class="mtag">Practice</span><div class="mbig">Build one Singing Stack</div>
+        <ol style="margin:0;padding-left:22px;font-size:18px;font-weight:800;display:flex;flex-direction:column;gap:6px">
+          <li>Put a <b>Note Block</b> in the air.</li>
+          <li>Press and hold it. Pick <b>Music Block</b>.</li>
+          <li>Put a <b>Cloud Block</b> on top.</li>
+          <li>Put a <b>Goomba</b> inside the cloud.</li>
+        </ol>
+        <p>Press play. Did you hear one note? Then delete it and tap Next!</p>`;
+      nextLabel = "I heard it!";
+    } else if (sc.t === "spot") {
+      pic = simpleScene(`<rect x="130" y="20" width="160" height="130" rx="8" fill="none" stroke="#E5483B" stroke-width="4" stroke-dasharray="10 6"/><text x="210" y="44" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="900" font-size="14" fill="#E5483B">your screen</text><use href="#i-player" x="80" y="126" width="38" height="38" style="stroke:#13203F;stroke-width:2.4"/><path d="M100 110 v-30 h40" fill="none" stroke="#13203F" stroke-width="3" stroke-dasharray="4 4"/><use href="#i-flag" x="140" y="118" width="40" height="46" style="stroke:#13203F;stroke-width:2.4"/>`);
+      text = `<span class="mtag">Find your spot</span><div class="mbig">Move the screen right until Mario is <u>just off</u> the left side</div>
+        <p>Your song starts at the left edge of the screen. The stacks must start off-screen, or they play before you're ready!</p>`;
+    } else if (sc.t === "place") {
+      const k = sc.k, e = mev[k];
+      pic = placePic(k);
+      const right = k === 0 ? null : mX(e) - mX(mev[k - 1]);
+      text = `<span class="mtag">Stack ${k + 1} of ${mev.length}</span>
+        <div class="mbig">${k === 0 ? "Put stack 1 at the left edge of the screen" : "Put the next stack here"}</div>
+        <div class="nums">
+          ${right === null ? `<div class="num2">${ic("flag")}<span><b>Start</b><small>left edge of screen</small></span></div>` : `<div class="num2">${ic("arrow-r")}<span><b>${right}</b><small>squares right of stack ${k}</small></span></div>`}
+          <div class="num2">${ic("arrow-u")}<span><b>${mHeight(e)}</b><small>squares above the ground</small></span></div>
+        </div>
+        <p>Count the squares in the picture. Tap <b>Hear it</b> to hear this note.</p>`;
+      nextLabel = "Done! Next";
+    } else if (sc.t === "test") {
+      const list = mev.slice(sc.from, sc.to + 1);
+      pic = simpleScene(`<use href="#i-play" x="110" y="40" width="80" height="80" style="stroke:#13203F;stroke-width:3"/>` + list.map((e, j) => stackSVG(40 + j * 60, 120, 28, colorFor(e.off), sc.from + j + 1, "done")).join(""));
+      text = `<span class="mtag">Test time!</span><div class="mbig">Press play in Mario Maker</div>
+        <p>You should hear stacks ${sc.from + 1} to ${sc.to + 1}. Tap the green button to hear how they should sound.</p>
+        <button class="btn go" id="mTestPlay">${ic("play")}Play stacks ${sc.from + 1} to ${sc.to + 1}</button>
+        <button class="btn small" id="mHelpBtn">${ic("question")}It sounds wrong</button>
+        ${mHelp ? `<div class="helpbox">Try these fixes:<ul>
+          <li><b>No sound at all?</b> Hold the Note Block and pick <b>Music Block</b>.</li>
+          <li><b>A note is too high or low?</b> Count the squares above the ground again.</li>
+          <li><b>Extra notes?</b> The Goomba walked off the cloud. Put a block on each side of it.</li>
+          <li><b>Too fast?</b> Check Auto-scroll is set to <b>Slow</b>.</li>
+          <li><b>Notes played at the very start?</b> The stacks were on the first screen. Move them further right.</li></ul></div>` : ""}`;
+      nextLabel = "Sounds right! Next";
+    } else {
+      pic = simpleScene(`<use href="#i-flagpole" x="190" y="60" width="90" height="104" style="stroke:#13203F;stroke-width:2.4"/><use href="#i-star" x="40" y="30" width="70" height="70" style="stroke:#13203F;stroke-width:2.4"/><use href="#i-player" x="120" y="126" width="38" height="38" style="stroke:#13203F;stroke-width:2.4"/>`);
+      text = `<span class="mtag">Last step</span><div class="mbig">Move the goal flag past the last stack</div>
+        <p>Then press play, put your hands down, and listen to your Tetris level!</p>
+        <button class="btn go" id="mWhole">${ic("play")}Hear the whole song</button>`;
+      nextLabel = "We did it!";
+    }
+    $("#mission").innerHTML = `<div class="mscreen">
+      <div class="mpic ${wide ? "wide" : ""}" id="mPic">${pic}</div>
+      <div class="mtext">${text}</div>
+      <div class="mnav">
+        <button class="btn" id="mBack" ${mStep === 0 ? "disabled" : ""}>Back</button>
+        ${sc.t === "place" ? `<button class="btn" id="mHear">${ic("speaker")}Hear it</button>` : ""}
+        <button class="btn spin" id="mNext" style="font-size:22px;min-height:58px;padding:8px 22px">${nextLabel}</button>
+      </div>
+    </div>`;
+    const mp = $("#mPic");
+    if (wide && mp) mp.scrollLeft = mp.scrollWidth;
+  }
+  $("#mission").addEventListener("click", e => {
+    const sc = SCREENS[mStep];
+    const blk = e.target.closest(".blk");
+    if (blk && blk.dataset.n) { const n = Number(blk.dataset.n); if (mev[n - 1]) hear(mev[n - 1].off); return; }
+    if (e.target.closest("#mHear")) { hear(mev[sc.k].off); return; }
+    if (e.target.closest("#mTestPlay")) { const list = mev.slice(sc.from, sc.to + 1); const base = list[0].col; play(list.map(x => ({ ...x, col: x.col - base })), 0.22); return; }
+    if (e.target.closest("#mWhole")) { play(mev, 0.2); return; }
+    if (e.target.closest("#mHelpBtn")) { mHelp = !mHelp; renderMission(); return; }
+    const go = d => { mStep = Math.max(0, Math.min(SCREENS.length - 1, mStep + d)); mHelp = false; store.set("mb.tetrisStep", mStep); renderMission(); $("#missionPanel").scrollIntoView({ behavior: reduced ? "auto" : "smooth" }); };
+    if (e.target.closest("#mBack")) { go(-1); return; }
+    const nx = e.target.closest("#mNext");
+    if (nx) {
+      if (mStep === SCREENS.length - 1) { burst(nx); extraLife(); mStep = 0; store.set("mb.tetrisStep", 0); built.music = (built.music || 0) + 1; store.set("mb.built", built); renderStickers(); setTimeout(renderMission, 1200); return; }
+      if (sc.t === "test") coin();
+      go(1);
+      const n2 = SCREENS[mStep]; if (n2.t === "place") hear(mev[n2.k].off);
+    }
+  });
+
   // ----- Step 1 tutorial: build one Singing Stack -----
   const TUT = [
     { say: "Put a Note Block in the air.", show: ["note"] },
@@ -1529,7 +1728,7 @@
   renderStickers();
   updateCount();
   renderParts();
-  renderSongs(); renderBuilder(); renderTut();
+  renderSongs(); renderBuilder(); renderTut(); renderMission();
   $("#startOut").textContent = music.start; $("#spaceOut").textContent = music.space;
   renderTune();
   const h = (location.hash || "").slice(1);
